@@ -1,0 +1,116 @@
+
+html { font-size: 16px; }
+body { font-size: 14px; font-size: 0.875rem; } /* =14px */
+h1   { font-size: 24px; font-size: 1.5rem; } /* =24px */
+
+html * {
+    color: #3a3a3a;
+    font-family: 'Montserrat', sans-serif;
+    text-decoration: none;
+}
+
+/* apply a natural box layout model to all elements, but allowing components to change */
+html {
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;         /* Opera/IE 8+ */
+}
+*, *:before, *:after {
+    -webkit-box-sizing: inherit;
+    -moz-box-sizing: inherit;
+    box-sizing: inherit;
+}
+
+body {
+    margin: 0;
+}
+
+div#wrapper-outer {
+    width: 100vw;
+    height: 100vh;
+    padding: 0;
+}
+div#wrapper-inner {
+    padding-left: 50px;
+    padding-right: 50px;
+    height: inherit;
+}
+
+div#topbar {
+    width: 100%;
+    height: 80px;
+}
+
+#logo {
+    display: table;
+    width: 100px;
+    height: 100%;
+    float: left;
+    text-align: center;
+    margin-left: 40px;
+    }
+    #logo a {
+        display: table-cell;
+        vertical-align: middle;
+        font-size: 0.9375rem;
+        font-weight: bold;
+    }
+
+#center-nav {
+    width: 500px;
+    height: inherit;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.tableWrapper {
+    display: table;
+    margin: 0 auto;
+}
+
+#center-nav ul {
+    list-style: none;
+    /*background-color: #f1f1f1;*/
+
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    }
+    #center-nav ul li {
+        display: inline;
+        padding-left: 30px;
+        vertical-align: middle;
+        line-height: 80px;
+    }
+    #center-nav ul li:first-child {
+         padding-left: 0px;
+    }
+    #center-nav ul li a {
+        color: #4a4a4a;
+        text-decoration: none;
+    }
+    #center-nav ul li a:hover {
+        /*background-color: #555;*/
+        color: black;
+    }
+    #center-nav ul li a.active {
+        /*background-color: #4CAF50;*/
+        color: black;
+    }
+    #center-nav ul li a:hover:not(.active) {
+        /*background-color: #555;*/
+        color: black;
+    }
+
+div#main {
+    width: 100%;
+    height: calc(100% - 80px);
+    padding: 40px;
+    background-color: #60b2ff;
+}
+
+p#intro {
+    font-size: 30px;
+    color: white;
+}
