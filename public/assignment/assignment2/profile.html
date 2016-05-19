@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="viewport" content="initial-scale=1.25, user-scalable=no">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/login.css" />
+    <title>Profile</title>
+</head>
+<body>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">
+                    Profile
+                </a>
+                <p class="navbar-text pull-right">
+                    <a href="" class="navbar-link"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></a>
+                </p>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="alert alert-danger">
+            Unable to update your profile.
+        </div>
+        <div class="alert alert-success">
+            Successfuly updated your profile.
+        </div>
+
+    <form> <!-- Doesn't need to be form, can be a div. We are not even going to use forms in the futuer, using ajx instead-->
+        <div class="form-group">
+            <label for="username">Username</label> <!-- for must match the id bellow -->
+            <input type="text"
+                   value ="jannunzi"
+                   class= "form-control"
+                   id ="username"
+                   placeholder="jannunzi" />
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label> <!-- for must match the id bellow -->
+            <input type="text"
+                   value = "jannunzi@gmail.com"
+                   class="form-control"
+                   id="email"
+                   placeholder="jannunzi@gmail.com" />
+        </div>
+        <div class="form-group">
+            <label for="first">First Name</label> <!-- for must match the id bellow -->
+            <input type="text"
+                   value = "Jose"
+                   class="form-control"
+                   id="first"
+                   placeholder="Jose" />
+        </div>
+        <div class="form-group">
+            <label for="last">Last Name</label> <!-- for must match the id bellow -->
+            <input type="text"
+                   value = "Annunziato"
+                   class="form-control"
+                   id="last"
+                   placeholder="Annunziato" />
+        </div>
+    </form>
+
+    <a class="btn btn-primary btn-block"
+       href="website-list.html">Applications</a>
+    <a class="btn btn-danger btn-block"
+       href="login.html">Logout</a>
+
+    </div>
+</body>
+</html>
