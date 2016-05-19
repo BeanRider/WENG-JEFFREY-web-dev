@@ -9,6 +9,23 @@ body {
 p.navbar-text.pull-right {
     margin-right: 15px;
 }
+
 p.navbar-text.pull-left {
     margin-left: 15px;
+}
+
+.jw-widget {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.jw-widget-tool {
+    background-color: white;
+    position: absolute;
+    right: 10px;
+    padding-left: 5px;
+    padding-bottom: 5px;
+    border-bottom-left-radius: 8px;
 }
