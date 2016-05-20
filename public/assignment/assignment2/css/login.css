@@ -29,3 +29,11 @@ p.navbar-text.pull-left {
     padding-bottom: 5px;
     border-bottom-left-radius: 8px;
 }
+
+.jw-list-group {
+    display: none;
+}
+
+.panel-heading {
+    height: 70px;
+}
