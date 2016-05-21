@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="viewport" content="initial-scale=1.25, user-scalable=no">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../css/login.css" />
+    <title>New Page</title>
+</head>
+<body>
+
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-inner">
+                <p class="navbar-text pull-left">
+                    <a href="page-list.html" class="navbar-link">
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    </a>
+                </p>
+                    <span class="navbar-brand">
+                        New Page
+                    </span>
+                <p class="navbar-text pull-right">
+                    <a href="page-list.html" class="navbar-link">
+                        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                    </a>
+                </p>
+            </div>
+        </div>
+    </nav>
+
+    <nav class="navbar navbar-default navbar-fixed-bottom">
+        <div class="container-fluid">
+            <div class="navbar-inner">
+                <p class="navbar-text pull-right">
+                    <a href="../user/profile.html">
+                        <span class="glyphicon glyphicon-user"
+                              aria-hidden="true"></span>
+                    </a>
+                </p>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <form> <!-- Doesn't need to be form, can be a div. We are not even going to use forms in the futuer, using ajx instead-->
+            <div class="form-group">
+                <label for="name">Name</label> <!-- for must match the id bellow -->
+                <input type="text"
+                       class= "form-control"
+                       id ="name"
+                       placeholder="Page name" />
+            </div>
+            <div class="form-group">
+                <label for="title">Title</label> <!-- for must match the id bellow -->
+                <input type="text"
+                       class= "form-control"
+                       id ="title"
+                       placeholder="Page title" />
+            </div>
+        </form>
+    </div>
+</body>
+</html>
