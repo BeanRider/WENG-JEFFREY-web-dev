@@ -4,6 +4,7 @@ input {
 
 body {
     padding-top: 60px;
+    padding-bottom: 60px;
 }
 
 p.navbar-text.pull-right {
