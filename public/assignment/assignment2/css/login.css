@@ -37,3 +37,7 @@ p.navbar-text.pull-left {
 .panel-heading {
     height: 70px;
 }
+
+.share-button {
+    color: #3a3a3a;
+}
