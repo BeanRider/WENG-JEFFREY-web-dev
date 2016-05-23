@@ -1,6 +1,6 @@
 angular
-    .module("WAM_App", [])
-    .controller("WAM_Controller", WAM_Controller);
+    .module("WAMApp", [])
+    .controller("WAMController", WAMController);
 
 var showingCard = true;
 $('.jw-card-toggle').change(function() {
