@@ -1,3 +1,7 @@
+angular
+    .module("WAM_App", [])
+    .controller("WAM_Controller", WAM_Controller);
+
 var showingCard = true;
 $('.jw-card-toggle').change(function() {
     showingCard = !showingCard;
