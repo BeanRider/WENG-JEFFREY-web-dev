@@ -3,8 +3,7 @@
 
 (function() {
     angular
-        .module("WAMApp", ["ngRoute"])
-        .controller("WAMController");
+        .module("WAMApp", ["ngRoute"]);
 
     var showingCard = true;
     $('.jw-card-toggle').change(function() {
