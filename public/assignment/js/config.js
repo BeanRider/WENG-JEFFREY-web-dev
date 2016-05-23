@@ -1,5 +1,4 @@
 (function() {
-
     angular
         .module("WAMApp")
         .config(Config);
@@ -49,4 +48,4 @@
                 templateURL: "views/widget/widget-edit.view.client.html"
             });
     }
-});
+})();
