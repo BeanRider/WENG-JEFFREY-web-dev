@@ -8,21 +8,23 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
     <link rel="stylesheet" href="../css/style.css" />
+    <title>New Page</title>
 </head>
 <body>
+
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-inner">
                 <p class="navbar-text pull-left">
-                    <a href="../website/website-list.html" class="navbar-link">
+                    <a href="page-list.view.client.html" class="navbar-link">
                         <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
                     </a>
                 </p>
-                <span class="navbar-brand">
-                    New Website
-                </span>
+                    <span class="navbar-brand">
+                        New Page
+                    </span>
                 <p class="navbar-text pull-right">
-                    <a href="website-list.html" class="navbar-link">
+                    <a href="page-list.view.client.html" class="navbar-link">
                         <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
                     </a>
                 </p>
@@ -34,9 +36,9 @@
         <div class="container-fluid">
             <div class="navbar-inner">
                 <p class="navbar-text pull-right">
-                    <a href="../user/profile.html">
-                                <span class="glyphicon glyphicon-user"
-                                      aria-hidden="true"></span>
+                    <a href="../user/profile.view.client.html">
+                        <span class="glyphicon glyphicon-user"
+                              aria-hidden="true"></span>
                     </a>
                 </p>
             </div>
@@ -44,23 +46,22 @@
     </nav>
 
     <div class="container">
-        <form>
+        <form> <!-- Doesn't need to be form, can be a div. We are not even going to use forms in the futuer, using ajx instead-->
             <div class="form-group">
                 <label for="name">Name</label> <!-- for must match the id bellow -->
                 <input type="text"
                        class= "form-control"
                        id ="name"
-                       placeholder="Name" />
+                       placeholder="Page name" />
             </div>
             <div class="form-group">
-                <label for="description">Description</label> <!-- for must match the id bellow -->
-                <textarea rows="5"
-                          class="form-control"
-                          id="description"
-                          placeholder="Description"></textarea>
+                <label for="title">Title</label> <!-- for must match the id bellow -->
+                <input type="text"
+                       class= "form-control"
+                       id ="title"
+                       placeholder="Page title" />
             </div>
         </form>
     </div>
-
 </body>
 </html>

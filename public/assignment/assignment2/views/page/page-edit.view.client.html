@@ -8,23 +8,22 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
     <link rel="stylesheet" href="../css/style.css" />
-    <title>New Page</title>
+    <title>Page Edit</title>
 </head>
 <body>
-
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-inner">
                 <p class="navbar-text pull-left">
-                    <a href="page-list.html" class="navbar-link">
+                    <a href="page-list.view.client.html" class="navbar-link">
                         <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
                     </a>
                 </p>
-                    <span class="navbar-brand">
-                        New Page
-                    </span>
+                <span class="navbar-brand">
+                    Edit Page
+                </span>
                 <p class="navbar-text pull-right">
-                    <a href="page-list.html" class="navbar-link">
+                    <a href="page-list.view.client.html" class="navbar-link">
                         <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
                     </a>
                 </p>
@@ -36,9 +35,9 @@
         <div class="container-fluid">
             <div class="navbar-inner">
                 <p class="navbar-text pull-right">
-                    <a href="../user/profile.html">
-                        <span class="glyphicon glyphicon-user"
-                              aria-hidden="true"></span>
+                    <a href="../user/profile.view.client.html">
+                                    <span class="glyphicon glyphicon-user"
+                                          aria-hidden="true"></span>
                     </a>
                 </p>
             </div>
@@ -50,18 +49,24 @@
             <div class="form-group">
                 <label for="name">Name</label> <!-- for must match the id bellow -->
                 <input type="text"
+                       value="Blog Post"
                        class= "form-control"
                        id ="name"
-                       placeholder="Page name" />
+                       placeholder="Page Name" />
             </div>
             <div class="form-group">
                 <label for="title">Title</label> <!-- for must match the id bellow -->
                 <input type="text"
                        class= "form-control"
                        id ="title"
-                       placeholder="Page title" />
+                       placeholder="Page Title" />
             </div>
         </form>
+
+        <a class="btn btn-danger btn-block"
+           href="page-list.view.client.html">Delete</a>
     </div>
+
+
 </body>
 </html>
