@@ -3,9 +3,9 @@
 
 (function() {
     angular
-        .module("WAMApp", [])
-        .controller("WAMController", WAMController);
-    
+        .module("WAMApp", ["ngRoute"])
+        .controller("WAMController");
+
     var showingCard = true;
     $('.jw-card-toggle').change(function() {
         showingCard = !showingCard;
