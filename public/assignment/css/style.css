@@ -2,9 +2,11 @@ input {
     margin-bottom: 5px;
 }
 
-body {
+.jw-application-view {
     padding-top: 60px;
     padding-bottom: 60px;
+    height: 500px;
+    overflow: auto;
 }
 
 p.navbar-text.pull-right {
@@ -41,4 +43,20 @@ p.navbar-text.pull-left {
 
 .no-blue-link {
     color: #3a3a3a;
+}
+
+.jw-application-pannel {
+    margin-top: 20px;
+    position: relative;
+}
+
+.navbar-fixed-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.navbar-fixed-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
 }
