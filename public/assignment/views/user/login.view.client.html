@@ -1,14 +1,30 @@
 <!DOCTYPE html>
 <div class="container">
+
+
     <h2>Login</h2>
-    <input class="form-control"
+
+    <!-- Trufee? model.error has to be there to render -->
+    <div ng-if="model.error" class="alert alert-danger" role="alert">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Error:</span>
+        {{model.error}}
+    </div>
+
+    <!-- ng-model variables: Only available in the view -->
+    <input ng-model="username"
+           class="form-control"
            placeholder="username"
            type="text"/>
-    <input class="form-control"
+
+    <!-- ng-model variables: Only available in the view -->
+    <input ng-model="password"
+           class="form-control"
            placeholder="password"
-           type="password"/>
-    <a class="btn btn-primary btn-block"
-       href="profile.view.client.html">Login</a>
+           type="password" />
+
+    <a ng-click="model.login(username, password)"
+       class="btn btn-primary btn-block">Login</a>
     <a class="btn btn-success btn-block"
-       href="register.view.client.html">Register</a>
+       href="#/register">Register</a>
 </div>
