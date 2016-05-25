@@ -14,26 +14,31 @@
 
     function ProfileController($routeParams) {
         var vm = this;
+        // put all event handlers at the top, just like variables
         vm.updateUser = updateUser;
 
         var id = $routeParams["uid"];
         console.log(id);
 
         var index = -1;
-        for (var i in users) {
-            if (users[i]._id === id) {
-                vm.user = users[i];
-                index = i;
+
+        // execute on load time.
+        function init() {
+            for (var i in users) {
+                if (users[i]._id === id) {
+                    vm.user = users[i];
+                    index = i;
+                }
             }
         }
+        init();
 
         function updateUser() {
-            users[i].username = vm.user.username;
-            users[i].firstName = vm.user.firstName;
-            users[i].lastName = vm.user.lastName;
+            users[index].username = vm.user.username;
+            users[index].firstName = vm.user.firstName;
+            users[index].lastName = vm.user.lastName;
+            vm.success = "User successfully updated!"
         }
-
-
     }
 
     function LoginController($location) { // location allows you to programmatically change the url

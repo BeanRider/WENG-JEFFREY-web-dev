@@ -18,7 +18,15 @@
 
 <div class="container">
 
-{{model.user}}
+    <div ng-show="model.success" class="alert alert-success">
+        {{model.success}}
+    </div>
+
+    <div ng-show="model.error" class="alert alert-success">
+        {{model.error}}
+    </div>
+
+    {{model.user}}
 
 <form> <!-- Doesn't need to be form, can be a div. We are not even going to use forms in the futuer, using ajx instead-->
     <div class="form-group">
