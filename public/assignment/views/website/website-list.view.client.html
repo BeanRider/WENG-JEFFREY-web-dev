@@ -35,6 +35,9 @@
     </div>
 </nav>
 
+
+
+
 <div class="jw-card-group container">
 <div class="row">
     <!-- 1st -->
@@ -145,43 +148,18 @@
 </div>
 
 
+{{model.websites}}
+
 <div class="jw-list-group container">
-    <ul class="list-group">
-        <li class="list-group-item">
-            <a href="../page/page-list.view.client.html">Blogging App</a>
-            <a href="" class="pull-right">
-                <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
-            </a>
-            <a href="website-edit.view.client.html" class="pull-right">
-                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-            </a>
-        </li>
-        <li class="list-group-item">
-            <a href="../page/page-list.view.client.html">Address Book App</a>
-            <a href="" class="pull-right">
-                <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
-            </a>
-            <a href="website-edit.view.client.html" class="pull-right">
-                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-            </a>
-        </li>
-        <li class="list-group-item">
-            <a href="../page/page-list.view.client.html">Script Testing App</a>
-            <a href="" class="pull-right">
-                <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
-            </a>
-            <a href="website-edit.view.client.html" class="pull-right">
-                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-            </a>
-        </li>
-        <li class="list-group-item">
-            <a href="../page/page-list.view.client.html">Blogger</a>
-            <a href="" class="pull-right">
-                <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
-            </a>
-            <a href="website-edit.view.client.html" class="pull-right">
-                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-            </a>
-        </li>
-    </ul>
+<ul class="list-group">
+    <li ng-repeat="" class="list-group-item">
+        <a href="../page/page-list.view.client.html">{{model.websites.name}}</a>
+        <a href="" class="pull-right">
+            <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+        </a>
+        <a href="website-edit.view.client.html" class="pull-right">
+            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+        </a>
+    </li>
+</ul>
 </div>
