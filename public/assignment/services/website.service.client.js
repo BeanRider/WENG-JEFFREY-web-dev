@@ -14,12 +14,11 @@
         ]
 
         var api = {
-            createWebsite: createWebsite,
-            findWebsitesByUser: findWebsitesByUser,
-            findWebsiteById: findWebsiteById,
-            updateWebsite: updateWebsite,
-            deleteWebsite: deleteWebsite,
-            findWebsitesForUser: findWebsitesForUser
+            createWebsite      : createWebsite,
+            findWebsitesByUser : findWebsitesByUser,
+            findWebsiteById    : findWebsiteById,
+            updateWebsite      : updateWebsite,
+            deleteWebsite      : deleteWebsite,
         };
         return api;
 
