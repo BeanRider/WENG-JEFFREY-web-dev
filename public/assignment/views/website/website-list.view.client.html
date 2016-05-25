@@ -152,7 +152,8 @@
 
 <div class="jw-list-group container">
 <ul class="list-group">
-    <li ng-repeat="" class="list-group-item">
+    <!-- Repeated li elements -->
+    <li ng-repeat="website in model.websites" class="list-group-item">
         <a href="../page/page-list.view.client.html">{{model.websites.name}}</a>
         <a href="" class="pull-right">
             <span class="glyphicon glyphicon-play" aria-hidden="true"></span>

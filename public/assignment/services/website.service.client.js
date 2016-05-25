@@ -15,7 +15,6 @@
 
         var api = {
             findWebsitesForUser: findWebsitesForUser
-
         };
         return api;
 

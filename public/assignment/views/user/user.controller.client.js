@@ -6,9 +6,7 @@
     // View model design pattern
     function LoginController($location, UserService) {
         // $location allows you to programmatically change the url: allows read or set the current url.
-
         var vm = this;
-        vm.hello = "Hello from view model";
 
         vm.login = login;
         function login(username, password) {
