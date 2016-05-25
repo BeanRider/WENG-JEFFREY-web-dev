@@ -4,7 +4,6 @@
         .controller("LoginController", LoginController)
         .controller("ProfileController", ProfileController);
 
-    // View model design pattern
     var users = [
         {_id: "123", username: "alice",    password: "alice",    firstName: "Alice",  lastName: "Wonder"  },
         {_id: "234", username: "bob",      password: "bob",      firstName: "Bob",    lastName: "Marley"  },
@@ -12,6 +11,7 @@
         {_id: "456", username: "jannunzi", password: "jannunzi", firstName: "Jose",   lastName: "Annunzi" }
     ]
 
+    // View model design pattern
     function ProfileController($routeParams) {
         var vm = this;
         // put all event handlers at the top, just like variables
@@ -26,7 +26,9 @@
         function init() {
             for (var i in users) {
                 if (users[i]._id === id) {
-                    vm.user = users[i];
+
+                    // BY DEFAULT: angular uses references.
+                    vm.user = angular.copy(users[i]);
                     index = i;
                 }
             }
