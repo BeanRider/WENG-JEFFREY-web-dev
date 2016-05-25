@@ -25,7 +25,7 @@
         return api;
 
         /**
-         * C: Add new user parameter instance to the local users array.
+         * C: Adds new user parameter instance to the local users array.
          * @param user - the user
          */
         function createUser(user) {
@@ -34,7 +34,7 @@
 
         /**
          * R: the user with the given _id in the local users array
-         * @param {number} userID
+         * @param {number} userId
          * @returns the user with the _id === userID OR null if DNE
          */
         function findUserById(userId) {
@@ -105,7 +105,7 @@
         function deleteUser(userId) {
             for (var i in users) {
                 if (users[i]._id === userId) {
-                    users.remove(users[i]);
+                    users.splice(i, 1);
                     return true;
                 }
             }
