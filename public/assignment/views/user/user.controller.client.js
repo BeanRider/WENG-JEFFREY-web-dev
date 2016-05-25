@@ -14,13 +14,26 @@
 
     function ProfileController($routeParams) {
         var vm = this;
+        vm.updateUser = updateUser;
+
         var id = $routeParams["uid"];
         console.log(id);
+
+        var index = -1;
         for (var i in users) {
             if (users[i]._id === id) {
                 vm.user = users[i];
+                index = i;
             }
         }
+
+        function updateUser() {
+            users[i].username = vm.user.username;
+            users[i].firstName = vm.user.firstName;
+            users[i].lastName = vm.user.lastName;
+        }
+
+
     }
 
     function LoginController($location) { // location allows you to programmatically change the url
