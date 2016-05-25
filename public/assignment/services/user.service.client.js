@@ -17,22 +17,24 @@
 
         var api = {
             createUser: createUser,
-            deleteUser: deleteUser,
-            findUserByUsernameAndPassword: findUserByUsernameAndPassword,
             findUserById: findUserById,
-            updateUser: updateUser
+            findUserByUsername: findUserByUsername,
+            findUserByCredentials: findUserByCredentials,
+            updateUser: updateUser,
+            deleteUser: deleteUser
+
         }
         return api;
 
         function createUser(user) {
-
+            
         }
 
         function deleteUser(id) {
 
         }
 
-        function findUserByUsernameAndPassword(username, password) {
+        function findUserByCredentials(username, password) {
             for (var i in users) { // 'i' is an index, not the object
                 if (users[i].username === username
                     && users[i].password === password) {
