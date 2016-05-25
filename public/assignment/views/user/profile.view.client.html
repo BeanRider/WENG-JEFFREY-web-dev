@@ -17,50 +17,42 @@
 </nav>
 
 <div class="container">
-    <!--<div class="alert alert-danger">-->
-        <!--Unable to update your profile.-->
-    <!--</div>-->
-    <!--<div class="alert alert-success">-->
-        <!--Successfuly updated your profile.-->
-    <!--</div>-->
+
+{{model.user}}
 
 <form> <!-- Doesn't need to be form, can be a div. We are not even going to use forms in the futuer, using ajx instead-->
     <div class="form-group">
         <label for="username">Username</label> <!-- for must match the id bellow -->
-        <input type="text"
-               value ="jannunzi"
-               class= "form-control"
-               id ="username"
-               placeholder="jannunzi" />
+        <input ng-model="model.user.username"
+               type="text"
+               class="form-control"
+               id="username" />
     </div>
     <div class="form-group">
         <label for="email">Email</label> <!-- for must match the id bellow -->
-        <input type="email"
-               value="jannunzi@gmail.com"
+        <input ng-model="model.user.email"
+               type="email"
                class="form-control"
-               id="email"
-               placeholder="jannunzi@gmail.com" />
+               id="email" />
     </div>
     <div class="form-group">
         <label for="first">First Name</label> <!-- for must match the id bellow -->
-        <input type="text"
-               value = "Jose"
+        <input ng-model="model.user.firstName"
+               type="text"
                class="form-control"
-               id="first"
-               placeholder="Jose" />
+               id="first" />
     </div>
     <div class="form-group">
         <label for="last">Last Name</label> <!-- for must match the id bellow -->
-        <input type="text"
-               value="Annunziato"
+        <input ng-model="model.user.lastName"
+               type="text"
                class="form-control"
-               id="last"
-               placeholder="Annunziato" />
+               id="last" />
     </div>
 </form>
 
 <a class="btn btn-primary btn-block"
-   href="#user/0/website">Websites</a>
+   href="#">Websites</a>
 <a class="btn btn-danger btn-block"
    href="#/login">Logout</a>
 
