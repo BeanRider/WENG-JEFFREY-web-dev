@@ -80,12 +80,15 @@
         /**
          * U: Updates the user with matching _id with the given user information.
          * @param {number} userId - user to update
-         * @param {string} user - user to be used to update
+         * @param {user} user - user to be used to update
          * @returns {boolean} true if the update was successful
          */
         function updateUser(userId, user) {
             for (var i in users) {
                 if (users[i]._id === userId) {
+                    users[i].username = user.username;
+                    users[i].password = user.password;
+                    users[i].email = user.email;
                     users[i].firstName = user.firstName;
                     users[i].lastName = user.lastName;
                     return true;
