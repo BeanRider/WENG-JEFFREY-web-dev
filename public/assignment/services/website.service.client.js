@@ -1,6 +1,6 @@
 (function() {
     angular
-        .model("WAMApp")
+        .module("WAMApp")
         .factory("WebsiteService", WebsiteService);
 
     var websites = [
