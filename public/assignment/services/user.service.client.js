@@ -15,16 +15,14 @@
         ]
 
         var api = {
-            createUser: createUser,
-            findUserById: findUserById,
-            findUserByUsername: findUserByUsername,
-            findUserByCredentials: findUserByCredentials,
-            updateUser: updateUser,
-            deleteUser: deleteUser
-
+            createUser            : createUser,
+            findUserById          : findUserById,
+            findUserByUsername    : findUserByUsername,
+            findUserByCredentials : findUserByCredentials,
+            updateUser            : updateUser,
+            deleteUser            : deleteUser
         }
         return api;
-
 
         /**
          * C: Add new user parameter instance to the local users array.
