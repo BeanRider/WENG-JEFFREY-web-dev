@@ -10,7 +10,6 @@
         vm.updateUser = updateUser;
 
         var id = $routeParams["uid"];
-        var index = -1;
         // execute on load time.
         function init() {
             vm.user = UserService.findUserById(id);
