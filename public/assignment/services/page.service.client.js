@@ -33,16 +33,16 @@
         }
 
         /**
-         * R: the pages with websiteId === givenWebsiteId
+         * R: the pages with websiteId === given websiteId
          * @param {number} websiteId - the webpage id to match
-         * @return {array} array of pages with matching websiteId
+         * @return {Array} array of pages with matching websiteId
          */
         function findPageByWebsiteId(websiteId) {
             var matchedPages = [];
             for (var i in pages) {
                 var pageI = pages[i]
                 if (pageI.websiteId === websiteId) {
-                    matchedPages.push(pageI);
+                    matchedPages.push(angular.copy(pageI));
                 }
             }
             return matchedPages;
@@ -57,10 +57,10 @@
             for (var i in pages) {
                 var pageI = pages[i];
                 if (pageI._id === pageId) {
-                    return pageI;
+                    return angular.copy(pageI);
                 }
             }
-            return null
+            return null;
         }
 
         /**
@@ -68,7 +68,6 @@
          * @param {number} pageId - the page id to match
          * @param the page to be used to update
          * @return {boolean} true if update was successful
-         *
          */
         function updatePage(pageId, page) {
             for (var i in pages) {
