@@ -22,13 +22,13 @@
         {{model.success}}
     </div>
 
-    <div ng-show="model.error" class="alert alert-success">
+    <div ng-show="model.error" class="alert alert-danger">
         {{model.error}}
     </div>
 
     {{model.user}}
 
-<form> <!-- Doesn't need to be form, can be a div. We are not even going to use forms in the futuer, using ajx instead-->
+<form> <!-- Doesn't need to be form, can be a div. We are not even going to use forms in the future, using ajx instead-->
     <div class="form-group">
         <label for="username">Username</label> <!-- for must match the id bellow -->
         <input ng-model="model.user.username"
