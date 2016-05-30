@@ -16,7 +16,9 @@
                 controllerAs: "model"
             })
             .when("default", { // TODO Check it
-                templateUrl: "views/user/login.view.client.html"
+                templateUrl: "views/user/login.view.client.html",
+                controller: "LoginController",
+                controllerAs: "model"
             })
             .when("/register", {
                 templateUrl: "views/user/register.view.client.html",
