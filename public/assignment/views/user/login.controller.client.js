@@ -1,7 +1,7 @@
 (function() {
     angular
         .module("WAMApp")
-        .controller("LoginController", LoginController)
+        .controller("LoginController", LoginController);
 
     // View model design pattern
     function LoginController($location, UserService) {
@@ -17,7 +17,6 @@
             } else {
                 vm.error = "User not found!";
             }
-
             console.log(username);
             console.log(password);
         }
