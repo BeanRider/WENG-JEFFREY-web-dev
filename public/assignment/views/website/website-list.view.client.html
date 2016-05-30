@@ -6,8 +6,10 @@
                 Websites
             </span>
             <p class="navbar-text pull-right">
-                <a href="website-new.view.client.html" class="navbar-link">
-                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                <a href="#/user/{{model.userId}}/website/new"
+                   class="navbar-link">
+                    <span class="glyphicon glyphicon-plus"
+                          aria-hidden="true"></span>
                 </a>
             </p>
         </div>
@@ -18,7 +20,7 @@
     <div class="container-fluid">
         <div class="navbar-inner">
             <p class="navbar-text pull-right">
-                <a href="../user/profile.view.client.html">
+                <a href="#/user/{{model.userId}}">
                         <span class="glyphicon glyphicon-user"
                               aria-hidden="true"></span>
                 </a>
@@ -29,137 +31,66 @@
                        data-on="Card"
                        data-off="List"
                        type="checkbox"
-                       checked data-toggle="toggle" />
+                       checked
+                       data-toggle="toggle" />
             </p>
         </div>
     </div>
 </nav>
 
-
-
-
 <div class="jw-card-group container">
-<div class="row">
-    <!-- 1st -->
-    <div class="col-xs-6">
-        <div class="panel panel-default">
-            <img width="100%"
-                 src="https://i.kinja-img.com/gawker-media/image/upload/s--NrtfWD7a--/dw3l4m5ulgn6qqlhr7om.png" />
-            <div class="panel-heading">
-                <a href="../page/page-list.view.client.html">
-                    <h5>Blogging App</h5>
-                </a>
-            </div>
-            <div class="panel-body">
-                <div class="row">
-                    <div class="col-xs-6 text-center">
-                        <a href="website-edit.view.client.html">
-                            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-                        </a>
-                    </div>
-                    <div class="col-xs-6 text-center">
-                        <a href="">
-                            <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
-                        </a>
-                    </div>
+    <div class="row">
+        <!-- Repeated div elements -->
+        <div ng-repeat="website in model.websites"
+             class="col-xs-6">
+            <div class="panel panel-default">
+                <img width="100%"
+                     src="https://i.kinja-img.com/gawker-media/image/upload/s--NrtfWD7a--/dw3l4m5ulgn6qqlhr7om.png" />
+                <div class="panel-heading">
+                    <a href="#/user/{{model.userId}}/website/{{website._id}}/page">
+                        <h5>{{website.name}}</h5>
+                    </a>
                 </div>
-            </div>
-        </div>
-    </div>
-    <!-- 2nd -->
-    <div class="col-xs-6">
-        <div class="panel panel-default">
-            <img width="100%"
-                 src="https://i.kinja-img.com/gawker-media/image/upload/s--NrtfWD7a--/dw3l4m5ulgn6qqlhr7om.png" />
-            <div class="panel-heading">
-                <a href="../page/page-list.view.client.html">
-                    <h5>Address Book App</h5>
-                </a>
-            </div>
-            <div class="panel-body">
-                <div class="row">
-                    <div class="col-xs-6 text-center">
-                        <a href="website-edit.view.client.html">
-                            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-                        </a>
-                    </div>
-                    <div class="col-xs-6 text-center">
-                        <a href="">
-                            <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- 3nd -->
-    <div class="col-xs-6">
-        <div class="panel panel-default">
-            <img width="100%"
-                 src="https://i.kinja-img.com/gawker-media/image/upload/s--NrtfWD7a--/dw3l4m5ulgn6qqlhr7om.png" />
-            <div class="panel-heading">
-                <a href="../page/page-list.view.client.html">
-                    <h5>Script Testing App</h5>
-                </a>
-            </div>
-            <div class="panel-body">
-                <div class="row">
-                    <div class="col-xs-6 text-center">
-                        <a href="website-edit.view.client.html">
-                            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-                        </a>
-                    </div>
-                    <div class="col-xs-6 text-center">
-                        <a href="">
-                            <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- 4nd -->
-    <div class="col-xs-6">
-        <div class="panel panel-default">
-            <img width="100%"
-                 src="https://i.kinja-img.com/gawker-media/image/upload/s--NrtfWD7a--/dw3l4m5ulgn6qqlhr7om.png" />
-            <div class="panel-heading">
-                <a href="../page/page-list.view.client.html">
-                    <h5>Blogger</h5>
-                </a>
-            </div>
-            <div class="panel-body">
-                <div class="row">
-                    <div class="col-xs-6 text-center">
-                        <a href="website-edit.view.client.html">
-                            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-                        </a>
-                    </div>
-                    <div class="col-xs-6 text-center">
-                        <a href="">
-                            <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
-                        </a>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-xs-6 text-center">
+                            <a href="#/user/{{model.userId}}/website/{{website._id}}">
+                                <span class="glyphicon glyphicon-cog"
+                                      aria-hidden="true"></span>
+                            </a>
+                        </div>
+                        <div class="col-xs-6 text-center">
+                            <a href="">
+                                <span class="glyphicon glyphicon-play"
+                                      aria-hidden="true"></span>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-</div>
-
 
 {{model.websites}}
 
-<div class="jw-list-group container">
+<div class="container">
 <ul class="list-group">
     <!-- Repeated li elements -->
-    <li ng-repeat="website in model.websites" class="list-group-item">
-        <a href="../page/page-list.view.client.html">{{model.websites.name}}</a>
-        <a href="" class="pull-right">
-            <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+    <li ng-repeat="website in model.websites"
+        class="list-group-item">
+        <a href="#/user/{{model.userId}}/website/{{website._id}}/page">
+            {{website.name}}
         </a>
-        <a href="website-edit.view.client.html" class="pull-right">
-            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+        <a href=""
+           class="pull-right">
+            <span class="glyphicon glyphicon-play"
+                  aria-hidden="true"></span>
+        </a>
+        <a href="#/user/{{model.userId}}/website/{{website._id}}"
+           class="pull-right">
+            <span class="glyphicon glyphicon-cog"
+                  aria-hidden="true"></span>
         </a>
     </li>
 </ul>
