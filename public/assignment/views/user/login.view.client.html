@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <div class="container">
 
-
     <h2>Login</h2>
 
     <!-- Trufee? model.error has to be there to render -->
-    <div ng-if="model.error" class="alert alert-danger" role="alert">
+    <div ng-if="model.error"
+         class="alert alert-danger"
+         role="alert">
         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
         <span class="sr-only">Error:</span>
         {{model.error}}
