@@ -29,11 +29,20 @@
          * @param website - the website to add
          */
         function createWebsite(userId, website) {
-            websites.push({
-                "_id": website._id,
-                "name": website.name,
-                "developerId": userId
-            })
+            if (website.description != null) {
+                websites.push({
+                    "_id": "" + (new Date).getTime(),
+                    "name": website.name,
+                    "description": website.description,
+                    "developerId": userId
+                });
+            } else {
+                websites.push({
+                    "_id": "" + (new Date).getTime(),
+                    "name": website.name,
+                    "developerId": userId
+                });
+            }
         }
 
         /**
