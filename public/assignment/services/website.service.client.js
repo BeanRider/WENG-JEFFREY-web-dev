@@ -45,7 +45,7 @@
             var matchedWebsites = [];
             for (var i in websites) {
                 if (websites[i].developerId === userId) {
-                    websites.push(angular.copy(websites[i]));
+                    matchedWebsites.push(angular.copy(websites[i]));
                 }
             }
             return matchedWebsites;
