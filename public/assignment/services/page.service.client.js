@@ -73,8 +73,8 @@
             for (var i in pages) {
                 var pageI = pages[i];
                 if (pageI._id === pageId) {
-                    pageI.name = page.name;
-                    pageI.developerId = page.developerId;
+                    pages[i] = angular.copy(page);
+                    console.log(pages[i]);
                     return true;
                 }
             }
