@@ -3,7 +3,8 @@
     <div class="container-fluid">
         <div class="navbar-inner">
             <p class="navbar-text pull-left">
-                <a href="website-list.view.client.html" class="navbar-link">
+                <a href="#/user/{{model.userId}}/website"
+                   class="navbar-link">
                     <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
                 </a>
             </p>
@@ -11,7 +12,8 @@
                 Edit Website
             </span>
             <p class="navbar-text pull-right">
-                <a href="website-list.view.client.html" class="navbar-link">
+                <a ng-click="model.updateWebsite()"
+                   class="navbar-link">
                     <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
                 </a>
             </p>
@@ -23,13 +25,14 @@
     <div class="container-fluid">
         <div class="navbar-inner">
             <p class="navbar-text pull-right">
-                <a href="../user/profile.view.client.html">
+                <a href="#/user/{{model.userId}}/website">
                         <span class="glyphicon glyphicon-user"
                               aria-hidden="true"></span>
                 </a>
             </p>
             <p class="navbar-text pull-left">
-                <a class="no-blue-link" href="">
+                <a class="no-blue-link"
+                   href="">
                         <span class="glyphicon glyphicon-share-alt"
                               aria-hidden="true"></span>
                 </a>
@@ -39,25 +42,40 @@
 </nav>
 
 <div class="container">
-<form> <!-- Doesn't need to be form, can be a div. We are not even going to use forms in the futuer, using ajx instead-->
-    <div class="form-group">
-        <label for="username">Website Name</label> <!-- for must match the id bellow -->
-        <input type="text"
-               value="Blogger"
-               class= "form-control"
-               id ="username"
-               placeholder="Enter website name here..." />
+    <div ng-show="model.success"
+         class="alert alert-success"
+         role="alert">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Success:</span>{{model.success}}
     </div>
-    <div class="form-group">
-        <label for="description">Website Description</label> <!-- for must match the id bellow -->
-        <textarea rows="5"
-                  class="form-control"
-                  id="description"
-                  placeholder="Enter description here...">Blogger is a blog-publishing service that allows multi-user blogs with time-stamped entries. It was developed by Pyra Labs, which was bought by Google in 2003. Generally, the blogs are hosted by Google at a subdomain of blogspot.com. Blogs can also be hosted in the registered custom domain of the blogger (like www.example.com). So blogspot.com domain publishings will be redirected to the custom domain. A user can have up to 100 blogs per account.
-        </textarea>
-    </div>
-</form>
 
-<a class="btn btn-danger btn-block"
-   href="website-list.view.client.html">Delete</a>
+    <div ng-show="model.error"
+         class="alert alert-danger"
+         role="alert">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Error:</span>{{model.error}}
+    </div>
+
+    <form> <!-- Doesn't need to be form, can be a div. We are not even going to use forms in the futuer, using ajx instead-->
+        <div class="form-group">
+            <label for="username">Website Name</label> <!-- for must match the id bellow -->
+            <input type="text"
+                   value="{{model.website.name}}"
+                   ng-model="model.website.name"
+                   class="form-control"
+                   id="username"
+                   placeholder="Enter website name here..." />
+        </div>
+        <div class="form-group">
+            <label for="description">Website Description</label> <!-- for must match the id bellow -->
+            <textarea rows="5"
+                      class="form-control"
+                      id="description"
+                      ng-model="model.website.description"
+                      placeholder="Enter description here...">{{model.website.description}}</textarea>
+        </div>
+    </form>
+
+    <a class="btn btn-danger btn-block"
+       ng-click="model.deleteWebsite()">Delete</a>
 </div>

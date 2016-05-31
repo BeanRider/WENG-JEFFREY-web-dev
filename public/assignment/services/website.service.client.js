@@ -83,8 +83,7 @@
         function updateWebsite(websiteId, website) {
             for (var i in websites) {
                 if (websites[i]._id === websiteId) {
-                    websites[i].name = website.name;
-                    websites[i].developerId = website.developerId;
+                    websites[i] = angular.copy(website);
                     return true;
                 }
             }
