@@ -40,7 +40,8 @@
         function findPageByWebsiteId(websiteId) {
             var matchedPages = [];
             for (var i in pages) {
-                var pageI = pages[i]
+                var pageI = pages[i];
+
                 if (pageI.websiteId === websiteId) {
                     matchedPages.push(angular.copy(pageI));
                 }
