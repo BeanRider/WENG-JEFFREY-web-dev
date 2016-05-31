@@ -31,14 +31,8 @@
          * @param widget - the widget to add
          */
         function createWidget(pageId, widget) {
-            // TODO find out how to create widget based on type
-            widget.push({
-                "_id": widget._id,
-                "widgetType": widget.widgetType,
-                "pageId": pageId,
-                "size": widget.size,
-                "text": widget.text
-            });
+            widgets.push(angular.copy(widget));
+            console.log(widgets);
         }
 
         /**
@@ -79,15 +73,10 @@
          * @return {boolean} true if update was successful
          */
         function updateWidget(widgetId, widget) {
-            // TODO find how to update widget based on type
             for (var i in widgets) {
                 var widgetI = widgets[i];
                 if (widgetI._id === widgetId) {
-                    widgetI.widgetType = widget.widgetType;
-                    widgetI.pageId = widget.pageId;
-                    widgetI.size = widget.size;
-                    widgetI.text = widget.text;
-                    return true;
+                    widgets[i] = angular.copy(widget);
                 }
             }
             return false;

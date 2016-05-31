@@ -67,12 +67,13 @@
             })
             .when("/user/:uid/website/:wid/page/:pid/widget/new", {
                 templateUrl: "views/widget/widget-chooser.view.client.html",
-                controller: "WidgetChooseController",
+                controller: "WidgetChooserController",
                 controllerAs: "model"
-
             })
             .when("/user/:uid/website/:wid/page/:pid/widget/:wgid", {
-                templateUrl: "views/widget/widget-edit.view.client.html"
+                templateUrl: "views/widget/widget-edit.view.client.html",
+                controller: "WidgetEditController",
+                controllerAs: "model"
             });
     }
 })();

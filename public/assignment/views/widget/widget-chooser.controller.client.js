@@ -3,29 +3,49 @@
        .module("WAMApp")
        .controller("WidgetChooserController", WidgetChooserController);
 
-    function WidgetChooserController($routeParams, WidgetService, $sce) {
+    function WidgetChooserController($routeParams, $location, WidgetService) {
         var vm = this;
-        vm.getTrustedHtml = getTrustedHtml;
-        vm.getTrustedUrl = getTrustedUrl;
+        vm.createWidget = createWidget;
 
         function init() {
             vm.userId = $routeParams["uid"];
             vm.websiteId = $routeParams["wid"];
             vm.pageId = $routeParams["pid"];
-            vm.widgets = WidgetService.findWidgetsByPageId(vm.pageId);
         }
         init();
 
-        function getTrustedUrl(widget) {
-            var urlParts = widget.url.split("/");
-            var id = urlParts[urlParts.length - 1];
-            var url = "https://www.youtube.com/embed/" + id;
-            return $sce.trustAsResourceUrl(url);
-        }
+        /*
+         var newWidget = {
+         _id: (new Date()).getTime(),
+         widgetType: type,
+         pageId: vm.pid
+         }
 
-        function getTrustedHtml(widget) {
-            var html = $sce.trustAsHtml(widget.text);
-            return html;
+         switch (type) {
+         case 'HEADER':
+         newWidget.size = vm.widget.size;
+         newWidget.text = vm.widget.text;
+         break;
+         case 'IMAGE':
+         newWidget.width = vm.widget.width;
+         newWidget.url = vm.widget.url;
+         break;
+         case 'YOUTUBE':
+         newWidget.width = vm.widget.width;
+         newWidget.url = vm.widget.url;
+         break;
+         }
+         WidgetService.createWidget(newWidget);
+         */
+
+        function createWidget(type) {
+            var newWidget = {
+                _id: "" + (new Date()).getTime(),
+                widgetType: type,
+                pageId: vm.pageId
+            }
+            WidgetService.createWidget(newWidget.pageId, newWidget);
+            $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/" + newWidget._id);
         }
     }
 })()

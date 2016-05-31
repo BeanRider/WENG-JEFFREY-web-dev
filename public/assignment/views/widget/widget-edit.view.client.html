@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-inner">
+            <p class="navbar-text pull-left">
+                <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget" class="navbar-link">
+                        <span class="glyphicon glyphicon-chevron-left"
+                              aria-hidden="true"></span>
+                </a>
+            </p>
+                <span class="navbar-brand">
+                    Widget Edit
+                </span>
+            <p class="navbar-text pull-right">
+                <a ng-click="model.updateWidget()" class="navbar-link">
+                        <span class="glyphicon glyphicon-ok"
+                              aria-hidden="true"></span>
+                </a>
+            </p>
+        </div>
+    </div>
+</nav>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <div class="navbar-inner">
+            <p class="navbar-text pull-right">
+                <a href="#/user/{{model.userId}}">
+                        <span class="glyphicon glyphicon-user"
+                              aria-hidden="true"></span>
+                </a>
+            </p>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+
+    <div ng-switch="model.widget.widgetType">
+        <div ng-switch-when="HEADER">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text"
+                       ng-model="model.widget.name"
+                       class="form-control"
+                       id ="name"
+                       placeholder="Heading Name" />
+            </div>
+            <div class="form-group">
+                <label for="text">Text</label>
+                <input ng-model="model.widget.text"
+                       type="text"
+                       class="form-control"
+                       id="text"
+                       placeholder="Heading Text" />
+            </div>
+            <div class="form-group">
+                <label for="size">Size</label>
+                <select class="form-control"
+                        id="size"
+                        ng-model="model.widget.size">
+                    <option>1</option>
+                    <option>2</option>
+                    <option selected="selected">3</option>
+                    <option>4</option>
+                    <option>5</option>
+                </select>
+            </div>
+        </div>
+
+        <div ng-switch-when="IMAGE">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text"
+                       class="form-control"
+                       id ="name"
+                       ng-model="model.widget.name"
+                       placeholder="Image Name" />
+            </div>
+            <div class="form-group">
+                <label for="text">Text</label>
+                <input type="text"
+                       class="form-control"
+                       id="text"
+                       ng-model="model.widget.text"
+                       placeholder="Image Text" />
+            </div>
+            <div class="form-group">
+                <label for="url">URL</label>
+                <input type="text"
+                       class="form-control"
+                       id="url"
+                       ng-model="model.widget.url"
+                       placeholder="Image URL" />
+            </div>
+            <div class="form-group">
+                <label for="width">Width</label>
+                <input type="number"
+                       class="form-control"
+                       id="width"
+                       ng-model="model.widget.width"
+                       placeholder="Image Width" />
+            </div>
+            <div class="form-group">
+                <label for="upload">Upload</label>
+                <input type="file"
+                       class="form-control"
+                       id="upload" />
+            </div>
+            <a class="btn btn-primary btn-block"
+               href="">Upload Image</a>
+        </div>
+
+        <div ng-switch-when="YOUTUBE">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text"
+                       class="form-control"
+                       id ="name"
+                       ng-model="model.widget.name"
+                       placeholder="YouTube Name" />
+            </div>
+            <div class="form-group">
+                <label for="text">Text</label>
+                <input type="text"
+                       class="form-control"
+                       id="text"
+                       ng-model="model.widget.text"
+                       placeholder="YouTube Text" />
+            </div>
+            <div class="form-group">
+                <label for="url">URL</label>
+                <input type="text"
+                       class="form-control"
+                       id="url"
+                       ng-model="model.widget.url"
+                       placeholder="YouTube URL" />
+            </div>
+            <div class="form-group">
+                <label for="width">Width</label>
+                <input type="number"
+                       class="form-control"
+                       id="width"
+                       ng-model="model.widget.width"
+                       placeholder="YouTube Width" />
+            </div>
+        </div>
+        <div ng-switch-default>
+            {{widget}}
+        </div>
+    </div>
+    <br />
+    <a class="btn btn-danger btn-block"
+       ng-click="model.deleteWidget()">Delete</a>
+</div>
+</div>
