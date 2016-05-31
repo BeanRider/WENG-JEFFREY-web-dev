@@ -25,11 +25,10 @@
          * @param page - the page to add
          */
         function createPage(websiteId, page) {
-            pages.push({
-                "_id": page._id,
-                "name": page.name,
-                "websiteId": websiteId
-            });
+            var newPage = angular.copy(page);
+            newPage.websiteId = websiteId;
+            pages.push(newPage);
+            console.log(pages);
         }
 
         /**

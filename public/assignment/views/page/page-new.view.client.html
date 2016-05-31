@@ -3,7 +3,7 @@
     <div class="container-fluid">
         <div class="navbar-inner">
             <p class="navbar-text pull-left">
-                <a href="page-list.view.client.html" class="navbar-link">
+                <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page" class="navbar-link">
                     <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
                 </a>
             </p>
@@ -11,7 +11,8 @@
                     New Page
                 </span>
             <p class="navbar-text pull-right">
-                <a href="page-list.view.client.html" class="navbar-link">
+                <a ng-click="model.newPage()"
+                   class="navbar-link">
                     <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
                 </a>
             </p>
@@ -23,7 +24,7 @@
     <div class="container-fluid">
         <div class="navbar-inner">
             <p class="navbar-text pull-right">
-                <a href="../user/profile.view.client.html">
+                <a href="#/user/{{model.userId}}">
                     <span class="glyphicon glyphicon-user"
                           aria-hidden="true"></span>
                 </a>
@@ -33,19 +34,36 @@
 </nav>
 
 <div class="container">
+
+    <div ng-show="model.success"
+         class="alert alert-success"
+         role="alert">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Success:</span>{{model.success}}
+    </div>
+
+    <div ng-show="model.error"
+         class="alert alert-danger"
+         role="alert">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Error:</span>{{model.error}}
+    </div>
+
     <form> <!-- Doesn't need to be form, can be a div. We are not even going to use forms in the futuer, using ajx instead-->
         <div class="form-group">
             <label for="name">Name</label> <!-- for must match the id bellow -->
-            <input type="text"
-                   class= "form-control"
-                   id ="name"
+            <input ng-model="model.page.name"
+                   type="text"
+                   class="form-control"
+                   id="name"
                    placeholder="Page name" />
         </div>
         <div class="form-group">
             <label for="title">Title</label> <!-- for must match the id bellow -->
-            <input type="text"
-                   class= "form-control"
-                   id ="title"
+            <input ng-model="model.page.title"
+                   type="text"
+                   class="form-control"
+                   id="title"
                    placeholder="Page title" />
         </div>
     </form>
