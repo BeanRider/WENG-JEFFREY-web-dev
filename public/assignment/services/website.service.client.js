@@ -18,7 +18,7 @@
             findWebsitesByUser : findWebsitesByUser,
             findWebsiteById    : findWebsiteById,
             updateWebsite      : updateWebsite,
-            deleteWebsite      : deleteWebsite,
+            deleteWebsite      : deleteWebsite
         };
         return api;
 
