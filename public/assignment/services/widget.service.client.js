@@ -98,7 +98,7 @@
          * @param {number} widgetId - the page id to match
          * @return {boolean} true if the deletion was successful
          */
-        function deletePage(widgetId) {
+        function deleteWidget(widgetId) {
             for (var i in widgets) {
                 if (widgets[i]._id === widgetId) {
                     widgets.splice(i, 1);
