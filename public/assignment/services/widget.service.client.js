@@ -22,7 +22,7 @@
             findWidgetById      : findWidgetById,
             updateWidget        : updateWidget,
             deleteWidget        : deleteWidget
-        }
+        };
         return api;
 
         /**
