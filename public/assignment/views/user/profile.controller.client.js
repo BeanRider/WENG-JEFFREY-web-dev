@@ -3,26 +3,46 @@
         .module("WAMApp")
         .controller("ProfileController", ProfileController);
 
-    function ProfileController($routeParams, UserService) {
+    function ProfileController($routeParams, $location, UserService) {
 
         var vm = this;
         // put all event handlers at the top, just like variables
         vm.updateUser = updateUser;
+        vm.unregister = unregister;
 
         var id = $routeParams["uid"];
         // execute on load time.
         function init() {
-            vm.user = UserService.findUserById(id);
+            UserService
+                .findUserById(id)
+                .then(function(response) {
+                    vm.user = response.data;
+                });
         }
         init();
 
         function updateUser() {
-            var result = UserService.updateUser(vm.user._id, vm.user);
-            if (result) {
-                vm.success = "User successfully updated!"
-            } else {
-                vm.error ="User failed to update!"
-            }
+            UserService
+                .updateUser(id, vm.user)
+                .then(
+                    function(response) {
+                    vm.success = "User successfully updated!"
+                    },
+                    function(error) {
+                        vm.error = error.data;
+                    });
+        }
+
+        function unregister() {
+            UserService
+                .deleteUser(id)
+                .then(
+                    function(response) {
+                        $location.url("/login");
+                    },
+                    function(error) {
+                        vm.error = error.data;
+                    });
         }
     }
 })();
