@@ -6,13 +6,7 @@
         .module("WAMApp")
         .factory("UserService", UserService); // $scope is a service, $location, $routeParams are all services. They allow for dependency injections
 
-    function UserService() {
-        var users = [
-           {_id: "123", username: "alice",    password: "alice",    firstName: "Alice",  lastName: "Wonder"  },
-           {_id: "234", username: "bob",      password: "bob",      firstName: "Bob",    lastName: "Marley"  },
-           {_id: "345", username: "charly",   password: "charly",   firstName: "Charly", lastName: "Garcia"  },
-           {_id: "456", username: "jannunzi", password: "jannunzi", firstName: "Jose",   lastName: "Annunzi" }
-        ];
+    function UserService($http) {
 
         var api = {
             createUser            : createUser,
@@ -29,7 +23,8 @@
          * @param user - the user
          */
         function createUser(user) {
-            users.push(angular.copy(user));
+            var url = "/api/user";
+            return $http.post(url, user);
         }
 
         /**
@@ -38,13 +33,8 @@
          * @returns the user with the _id === userID OR null if DNE
          */
         function findUserById(userId) {
-            for (var i in users) {
-                if (users[i]._id === userId) {
-                    // BY DEFAULT: angular uses references, therefore return a copy to prevent modifications.
-                    return angular.copy(users[i]);
-                }
-            }
-            return null;
+            var url = "/api/user/" + userId;
+            return $http.get(url);
         }
 
         /**
@@ -53,12 +43,8 @@
          * @returns the users with the same username OR null if DNE
          */
         function findUserByUsername(username) {
-            for (var i in users) {
-                if (users[i].username === username) {
-                    return angular.copy(users[i]);
-                }
-            }
-            return null;
+            var url = "/api/user?username=" + username;
+            return $http.get(url);
         }
 
         /**
@@ -68,13 +54,10 @@
          * @returns the user with the username and password pair
          */
         function findUserByCredentials(username, password) {
-            for (var i in users) { // 'i' is an index, not the object
-                if (users[i].username === username
-                    && users[i].password === password) {
-                    return angular.copy(users[i]);
-                }
-            }
-            return null;
+            // Don't really need the "http://localhost:3000" part bellow:
+            // var url = "http://localhost:3000/api/user?username=" + username + "&password=" + password;
+            var url = "/api/user?username=" + username + "&password=" + password;
+            return $http.get(url); // returns a promise
         }
 
         /**
@@ -84,17 +67,8 @@
          * @returns {boolean} true if the update was successful
          */
         function updateUser(userId, user) {
-            for (var i in users) {
-                if (users[i]._id === userId) {
-                    users[i].username = user.username;
-                    users[i].password = user.password;
-                    users[i].email = user.email;
-                    users[i].firstName = user.firstName;
-                    users[i].lastName = user.lastName;
-                    return true;
-                }
-            }
-            return false;
+            var url = "/api/user/" + userId;
+            return $http.put(url, user); // returns a promise
         }
 
         /**
@@ -103,13 +77,8 @@
          * @returns {boolean} true if the deletion was successful
          */
         function deleteUser(userId) {
-            for (var i in users) {
-                if (users[i]._id === userId) {
-                    users.splice(i, 1);
-                    return true;
-                }
-            }
-            return false;
+            var url = "/api/user/" + userId;
+            return $http.delete(url); // returns a promise
         }
    }
 })();
