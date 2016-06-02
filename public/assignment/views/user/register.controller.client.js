@@ -4,27 +4,31 @@
         .controller("RegisterController", RegisterController);
     function RegisterController($location, UserService) {
         var vm = this;
-        vm.verifyAndCreateUser = verifyAndCreateUser;
+        vm.register = register;
 
-        function verifyAndCreateUser(username, password, passwordVerify) {
-            // Username already exists
-            if (UserService.findUserByUsername(username) != null) {
-                vm.error = "Username already exists!";
-                return;
-            }
-            if (password === passwordVerify) {
-                var validatedUser = {
-                    _id: "" + (new Date).getTime(),
-                    username: username,
-                    password: password
-                }
-                UserService.createUser(validatedUser);
-                vm.success = "Created new user!";
-                $location.url("/user/" + validatedUser._id);
-            } else {
+        function register(username, password, passwordVerify) {
+
+            // Early password validation
+            if (password !== passwordVerify) {
                 vm.error = "Passwords do not match!";
                 return;
             }
+
+            var newUser = {};
+            newUser.username = username;
+            newUser.password = password;
+
+            // Unique username validation in the server side
+            UserService
+                .createUser(newUser)
+                .then(
+                    function(response) {
+                        $location.url("/user/" + response.data._id);
+                    },
+                    function(error) {
+                        vm.error = error.data;
+                    }
+                );
         }
     }
 })();

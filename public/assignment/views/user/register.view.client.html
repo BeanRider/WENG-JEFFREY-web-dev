@@ -19,18 +19,18 @@
     <input ng-model="username"
            class="form-control"
            placeholder="username"
-           type="text"/>
+           type="text" />
     <input ng-model="password"
            class="form-control"
            placeholder="password"
-           type="password"/>
+           type="password" />
     <input ng-model="passwordAgain"
            class="form-control"
            placeholder="verify password"
-           type="password"/>
+           type="password" />
 
     <a class="btn btn-primary btn-block"
-       ng-click="model.verifyAndCreateUser(username, password, passwordAgain)">Register</a>
+       ng-click="model.register(username, password, passwordAgain)">Register</a>
     <a class="btn btn-danger btn-block"
        href="#/login">Cancel</a>
 </div>
