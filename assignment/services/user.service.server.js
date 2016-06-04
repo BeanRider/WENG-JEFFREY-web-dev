@@ -30,7 +30,6 @@ module.exports = function(app) {
         newUser._id = "" + (new Date).getTime();
         users.push(newUser);
         res.json(newUser);
-        console.log(users);
     }
 
     function getUsers(req, res) {
