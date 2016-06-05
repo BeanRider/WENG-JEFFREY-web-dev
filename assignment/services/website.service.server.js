@@ -63,7 +63,10 @@ module.exports = function(app) {
         var websiteId = req.params.websiteId;
         var newWebsite = req.body;
 
-        if (newWebsite.name === "" || newWebsite.name == null) {
+        if (newWebsite == null) {
+            res.status(400).send("A website cannot be null!");
+            return;
+        } else if (newWebsite.name === "" || newWebsite.name == null) {
             res.status(400).send("Website name cannot be empty!");
             return;
         }
