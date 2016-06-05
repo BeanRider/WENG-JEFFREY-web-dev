@@ -5,6 +5,7 @@ module.exports = function(app) {
     // Load Server Service Files into EXPRESS, then allow the services to use the app by passing in the app.
     var userService = require("./services/user.service.server.js")(app);
     var websiteService = require("./services/website.service.server.js")(app);
+    var pageService = require("./services/page.service.server.js")(app);
     var widgetService = require("./services/widget.service.server.js")(app);
 
     app.get("/say/:message", function(req, res) { // ':' means wildcard, holds values
