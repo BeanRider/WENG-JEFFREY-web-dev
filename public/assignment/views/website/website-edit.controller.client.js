@@ -39,11 +39,6 @@
         }
 
         function updateWebsite() {
-            if (vm.website.name === "" || vm.website.name == null) {
-                vm.error = "Website name cannot be empty!";
-                return;
-            }
-
             WebsiteService
                 .updateWebsite(vm.website._id, vm.website)
                 .then(

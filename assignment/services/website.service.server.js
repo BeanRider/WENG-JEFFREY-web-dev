@@ -62,6 +62,12 @@ module.exports = function(app) {
     function updateWebsite(req, res) {
         var websiteId = req.params.websiteId;
         var newWebsite = req.body;
+
+        if (newWebsite.name === "" || newWebsite.name == null) {
+            res.status(400).send("Website name cannot be empty!");
+            return;
+        }
+
         for (var i in websites) {
             if (websites[i]._id === websiteId) {
                 websites[i] = JSON.parse(JSON.stringify(newWebsite));
