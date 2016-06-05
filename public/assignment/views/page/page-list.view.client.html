@@ -33,6 +33,21 @@
 </nav>
 
 <div class="container">
+
+    <div ng-show="model.success"
+         class="alert alert-success"
+         role="alert">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Success:</span>{{model.success}}
+    </div>
+
+    <div ng-show="model.error"
+         class="alert alert-danger"
+         role="alert">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Error:</span>{{model.error}}
+    </div>
+
     <ul class="list-group">
         <li ng-repeat="page in model.pages"
             class="list-group-item">
