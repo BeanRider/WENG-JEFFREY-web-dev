@@ -73,23 +73,38 @@
 <!--</div>-->
 
 <div class="container">
-<ul class="list-group">
-    <!-- Repeated li elements -->
-    <li ng-repeat="website in model.websites"
-        class="list-group-item">
-        <a href="#/user/{{model.userId}}/website/{{website._id}}/page">
-            {{website.name}}
-        </a>
-        <a href=""
-           class="pull-right">
-            <span class="glyphicon glyphicon-play"
-                  aria-hidden="true"></span>
-        </a>
-        <a href="#/user/{{model.userId}}/website/{{website._id}}"
-           class="pull-right">
-            <span class="glyphicon glyphicon-cog"
-                  aria-hidden="true"></span>
-        </a>
-    </li>
-</ul>
+
+    <div ng-show="model.success"
+         class="alert alert-success"
+         role="alert">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Success:</span>{{model.success}}
+    </div>
+
+    <div ng-show="model.error"
+         class="alert alert-danger"
+         role="alert">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Error:</span>{{model.error}}
+    </div>
+
+    <ul class="list-group">
+        <!-- Repeated li elements -->
+        <li ng-repeat="website in model.websites"
+            class="list-group-item">
+            <a href="#/user/{{model.userId}}/website/{{website._id}}/page">
+                {{website.name}}
+            </a>
+            <a href=""
+               class="pull-right">
+                <span class="glyphicon glyphicon-play"
+                      aria-hidden="true"></span>
+            </a>
+            <a href="#/user/{{model.userId}}/website/{{website._id}}"
+               class="pull-right">
+                <span class="glyphicon glyphicon-cog"
+                      aria-hidden="true"></span>
+            </a>
+        </li>
+    </ul>
 </div>
