@@ -14,29 +14,49 @@
             vm.userId = $routeParams["uid"];
             vm.websiteId = $routeParams["wid"];
             vm.pageId = $routeParams["pid"];
-            vm.page = PageService.findPageById(vm.pageId);
-
+            PageService
+                .findPageById(vm.pageId)
+                .then(
+                    function(response) {
+                        vm.page = response.data;
+                    },
+                    function(error) {
+                        vm.error = error.data;
+                    }
+                );
         }
         init();
 
         function updatePage() {
-            if (vm.page.name == null || vm.page.name === "") {
-                vm.error = "Must provide a page name!";
-                return;
-            }
-            vm.error = null;
-            PageService.updatePage(vm.pageId, vm.page);
-            vm.succcess = "Page updated!";
-            $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
+            PageService
+                .updatePage(vm.pageId, vm.page)
+                .then(
+                    function(response) {
+                        vm.error = null;
+                        vm.success = "Page updated!";
+                        $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
+                    },
+                    function(error) {
+                        vm.succcess = null;
+                        vm.error = error.data;
+                    }
+                );
         }
 
         function deletePage() {
-            if (!PageService.deletePage(vm.pageId)) {
-                vm.error = "Delete page failed!";
-            }
-            vm.error = null;
-            vm.succcess = "Page deleted!";
-            $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
+            PageService
+                .deletePage(vm.pageId)
+                .then(
+                    function(response) {
+                        vm.error = null;
+                        vm.succcess = "Page deleted!";
+                        $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
+                    },
+                    function(error) {
+                        vm.success = null;
+                        vm.error = error.data;
+                    }
+                );
         }
     }
 
