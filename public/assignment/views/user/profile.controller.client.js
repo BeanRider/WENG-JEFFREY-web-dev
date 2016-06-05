@@ -26,7 +26,7 @@
                 .updateUser(id, vm.user)
                 .then(
                     function(response) {
-                    vm.success = "User successfully updated!"
+                        vm.success = "User successfully updated!"
                     },
                     function(error) {
                         vm.error = error.data;
