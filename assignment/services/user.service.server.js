@@ -17,7 +17,6 @@ module.exports = function(app) {
 
     function createUser(req, res) {
         var newUser = req.body;
-        console.log("reach");
 
         // Username already exists
         for (var i in users) {
@@ -57,7 +56,7 @@ module.exports = function(app) {
                 return;
             }
         }
-        res.send(403);
+        res.send(403); // more or less authentication error
     }
 
     // A helper for getUsers();
@@ -68,7 +67,7 @@ module.exports = function(app) {
                 return;
             }
         }
-        res.send(403);
+        res.send(404);
     }
 
     function findUserById(req, res) {
@@ -79,7 +78,7 @@ module.exports = function(app) {
                 return;
             }
         }
-        res.send(403);
+        res.send(404);
     }
 
     function updateUser(req, res) {
@@ -93,10 +92,10 @@ module.exports = function(app) {
                 users[i].firstName = newUser.firstName;
                 users[i].lastName = newUser.lastName;
                 res.send(200);
-                console.log(users);
                 return;
             }
         }
+        // 400: client not possible to update user
         res.status(400).send("User with id: " + id + " not found!");
     }
 
@@ -106,10 +105,10 @@ module.exports = function(app) {
             if (users[i]._id === id) {
                 users.splice(i, 1);
                 res.send(200);
-                console.log(users);
                 return;
             }
         }
-        res.status(404).send("Unable to remove user with id: " + id + "!");
+        // 400: client not possible to delete user
+        res.status(400).send("Unable to remove user with id: " + id + "!");
     }
 };
