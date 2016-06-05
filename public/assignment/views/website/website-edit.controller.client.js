@@ -12,30 +12,50 @@
         function init() {
             vm.websiteId = $routeParams["wid"];
             vm.userId = $routeParams["uid"];
-            vm.website = WebsiteService.findWebsiteById(vm.websiteId);
+            WebsiteService
+                .findWebsiteById(vm.websiteId)
+                .then(
+                    function(response) {
+                        vm.website = response.data;
+                    }
+                );
         }
         init();
 
         function deleteWebsite() {
-            if (!WebsiteService.deleteWebsite(vm.website._id)) {
-                vm.error = "Failed to delete website!";
-                return;
-            }
-            vm.error = null;
-            vm.success = "Website delete successful!";
-            $location.url("/user/" + vm.userId +"/website");
+            WebsiteService
+                .deleteWebsite(vm.website._id)
+                .then(
+                    function(response) {
+                        vm.error = null;
+                        vm.success = "Website delete successful!";
+                        $location.url("/user/" + vm.userId +"/website");
+                    },
+                    function(error) {
+                        vm.success = null;
+                        vm.error = error.data;
+                    }
+                );
         }
 
         function updateWebsite() {
-            if (vm.website.name === "" || vm.website.name == null ) {
+            if (vm.website.name === "" || vm.website.name == null) {
                 vm.error = "Website name cannot be empty!";
                 return;
             }
-            WebsiteService.updateWebsite(vm.website._id, vm.website);
-            vm.error = null;
-            vm.success = "Website update successful!";
-            $location.url("/user/" + vm.userId +"/website");
-        }
 
+            WebsiteService
+                .updateWebsite(vm.website._id, vm.website)
+                .then(
+                    function(response) {
+                        vm.error = null;
+                        vm.success = "Website update successful!";
+                        $location.url("/user/" + vm.userId +"/website");
+                    },
+                    function(error) {
+                        vm.success = null;
+                        vm.error = error.data;
+                    });
+        }
     }
 })();
