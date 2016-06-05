@@ -18,6 +18,21 @@ module.exports = function(app) {
     function createUser(req, res) {
         var newUser = req.body;
 
+        if (newUser == null) {
+            res.status(400).send("A user cannot be null!");
+            return;
+        }
+
+        if (newUser.password == null || newUser.password === "") {
+            res.status(400).send("Password cannot be blank!");
+            return;
+        }
+
+        if (newUser.username == null || newUser.username === "") {
+            res.status(400).send("Username cannot be blank!");
+            return;
+        }
+
         // Username already exists
         for (var i in users) {
             if (users[i].username === newUser.username) {
@@ -84,6 +99,22 @@ module.exports = function(app) {
     function updateUser(req, res) {
         var id = req.params.userId;
         var newUser = req.body;
+
+        if (newUser == null) {
+            res.status(400).send("A user cannot be null!");
+            return;
+        }
+
+        if (newUser.password == null || newUser.password === "") {
+            res.status(400).send("Password cannot be blank!");
+            return;
+        }
+
+        if (newUser.username == null || newUser.username === "") {
+            res.status(400).send("Username cannot be blank!");
+            return;
+        }
+
         for (var i in users) {
             if (users[i]._id === id) {
                 users[i].username = newUser.username;
