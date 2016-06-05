@@ -10,21 +10,21 @@
         function init() {
             vm.userId = $routeParams["uid"];
             vm.website = {};
-            console.log(vm.userId);
         }
         init();
 
         function newWebsite() {
-            // console.log(vm.website.name);
-            if (vm.website == null) {
-                vm.error = "A website must cannot be null!";
-                return;
-            } else if (vm.website.name == null) {
-                vm.error = "A website must have a name!";
-                return;
-            }
-            WebsiteService.createWebsite(vm.userId, vm.website);
-            $location.url("/user/" + vm.userId + "/website");
+            WebsiteService
+                .createWebsite(vm.userId, vm.website)
+                .then(
+                    function(response) {
+                        $location.url("/user/" + vm.userId + "/website");
+                    },
+                    function(error) {
+                        vm.success = null;
+                        vm.error = error.data;
+                    }
+                );
         }
 
     }
