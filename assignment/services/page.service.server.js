@@ -22,6 +22,7 @@ module.exports = function(app) {
             return;
         }
 
+        newPage._id = "" + (new Date).getTime();
         newPage.websiteId = websiteId;
 
         pages.push(newPage);
@@ -59,6 +60,10 @@ module.exports = function(app) {
     function updatePage(req, res) {
         var pageId = req.params.pageId;
         var updatedPage = req.body;
+
+        if (updatedPage == null) {
+            res.status(400).send("A page cannot be null!");
+        }
 
         if (updatedPage.name == null || updatedPage.name === "") {
             res.status(400).send("Must provide a page name!");

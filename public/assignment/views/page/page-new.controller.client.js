@@ -12,7 +12,7 @@
         function init() {
             vm.userId = $routeParams["uid"];
             vm.websiteId = $routeParams["wid"];
-            vm.page = {_id: "" + (new Date).getTime()};
+            vm.page = {};
         }
         init();
 
