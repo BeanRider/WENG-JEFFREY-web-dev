@@ -15,11 +15,11 @@ module.exports = function(app) {
     app.delete("/api/website/:websiteId", deleteWebsite);
 
     function createWebsite(req, res) {
-        var newWebsite = req.body;
+        var newWebsite = JSON.parse(JSON.stringify(req.body));
         var devId = req.params.userId;
 
         if (newWebsite == null) {
-            res.status(400).send("A website must cannot be null!");
+            res.status(400).send("A website cannot be null!");
             return;
         } else if (newWebsite.name == null) {
             res.status(400).send("A website must have a name!");
@@ -52,7 +52,7 @@ module.exports = function(app) {
         var websiteId = req.params.websiteId;
         for (var i in websites) {
             if (websites[i]._id === websiteId) {
-                res.json(websites[i]);
+                res.json(JSON.parse(JSON.stringify(websites[i])));
                 return;
             }
         }
@@ -69,7 +69,7 @@ module.exports = function(app) {
                 return;
             }
         }
-        res.status(404).send("Given website id: " + websiteId + " not found!");
+        res.status(400).send("Given website id: " + websiteId + " not found!");
     }
 
     function deleteWebsite(req, res) {
@@ -81,6 +81,6 @@ module.exports = function(app) {
                 return;
             }
         }
-        res.status(404).send("Given website id: " + websiteId + " not found!");
+        res.status(400).send("Given website id: " + websiteId + " not found!");
     }
 };
