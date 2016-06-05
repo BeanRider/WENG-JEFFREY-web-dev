@@ -17,14 +17,19 @@
         init();
 
         function newPage() {
-            if (vm.page.name == null || vm.page.name === "") {
-                vm.error = "Must provide a page name!";
-                return;
-            }
-            vm.error = null;
-            PageService.createPage(vm.websiteId, vm.page);
-            vm.succcess = "New Page added!";
-            $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
+            PageService
+                .createPage(vm.websiteId, vm.page)
+                .then(
+                    function(response) {
+                        vm.error = null;
+                        vm.succcess = "New Page added!";
+                        $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
+                    },
+                    function(error) {
+                        vm.success = null;
+                        vm.error = error.data;
+                    }
+                );
         }
     }
 
