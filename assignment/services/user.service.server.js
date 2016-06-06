@@ -93,7 +93,7 @@ module.exports = function(app) {
                 return;
             }
         }
-        res.send(404);
+        res.status(404).send("User id is not found: " + id);
     }
 
     function updateUser(req, res) {

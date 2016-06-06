@@ -15,9 +15,14 @@
         function init() {
             UserService
                 .findUserById(id)
-                .then(function(response) {
-                    vm.user = response.data;
-                });
+                .then(
+                    function(response) {
+                        vm.user = response.data;
+                    },
+                    function(error) {
+                        vm.error = error.data;
+                    }
+                );
         }
         init();
 
@@ -26,9 +31,11 @@
                 .updateUser(id, vm.user)
                 .then(
                     function(response) {
+                        vm.error = null;
                         vm.success = "User successfully updated!"
                     },
                     function(error) {
+                        vm.success = null;
                         vm.error = error.data;
                     });
         }
