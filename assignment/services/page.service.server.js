@@ -54,7 +54,7 @@ module.exports = function(app) {
                 return;
             }
         }
-        res.status(404).send("Given page ID: " + pageId + "not found!");
+        res.status(404).send("Given page ID: " + pageId + " not found!");
     }
 
     function updatePage(req, res) {
