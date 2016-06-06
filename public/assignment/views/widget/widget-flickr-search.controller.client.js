@@ -37,6 +37,7 @@
                 .searchPhotos(searchText)
                 .then(
                     function(response) {
+                        vm.error = null;
                         var data = response.data.replace("jsonFlickrApi(","");
                         data = data.substring(0, data.length - 1);
                         data = JSON.parse(data);
@@ -58,10 +59,11 @@
                 .updateWidget(vm.widget._id, vm.widget)
                 .then(
                     function(response) {
-                        console.log("Image URL successfully updated!");
+                        vm.error = null;
+                        vm.success = "Image URL successfully updated!";
                     },
                     function(error) {
-                        console.log("Image URL failed to update!");
+                        vm.error = error.data + " - Image URL failed to update!";
                     }
                 );
         }
