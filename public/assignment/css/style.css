@@ -2,6 +2,10 @@ input {
     margin-bottom: 5px;
 }
 
+a.btn-block.btn {
+    margin-top: 5px;
+}
+
 .jw-application-view {
     padding-top: 60px;
     padding-bottom: 60px;
@@ -61,4 +65,13 @@ p.navbar-text.pull-left {
     position: absolute;
     bottom: 0;
     left: 0;
+}
+
+div.flickr-results {
+    margin-top: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+div.flickr-results div {
+    padding: 0;
 }
