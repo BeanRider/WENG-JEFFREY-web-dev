@@ -12,7 +12,16 @@
             vm.userId = $routeParams["uid"];
             vm.websiteId = $routeParams["wid"];
             vm.pageId = $routeParams["pid"];
-            vm.widgets = WidgetService.findWidgetsByPageId(vm.pageId);
+            WidgetService
+                .findWidgetsByPageId(vm.pageId)
+                .then(
+                    function(response) {
+                        vm.widgets = response.data;
+                    },
+                    function(error) {
+                        vm.error = error.data;
+                    }
+                );
         }
         init();
 
@@ -27,5 +36,8 @@
             var html = $sce.trustAsHtml(widget.text);
             return html;
         }
+
+        $(".widget-container").sortable();
+        $(".widget-container").sortable("option", "axis", "y");
     }
 })()
