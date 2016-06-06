@@ -40,12 +40,18 @@
 
         function createWidget(type) {
             var newWidget = {
-                _id: "" + (new Date()).getTime(),
                 widgetType: type,
-                pageId: vm.pageId
             }
-            WidgetService.createWidget(newWidget.pageId, newWidget);
-            $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/" + newWidget._id);
+            WidgetService
+                .createWidget(vm.pageId, newWidget)
+                .then(
+                    function(response) {
+                        $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/" + response.data._id);
+                    },
+                    function(error) {
+                        
+                    }
+                );
         }
     }
 })()
