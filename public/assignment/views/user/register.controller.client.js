@@ -8,7 +8,7 @@
 
         function register(username, password, passwordVerify) {
 
-            // Early password validation
+            // password validation
             if (password !== passwordVerify) {
                 vm.error = "Passwords do not match!";
                 return;

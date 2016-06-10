@@ -28,43 +28,63 @@
 
     {{model.user}}
 
-<form> <!-- Doesn't need to be form, can be a div. We are not even going to use forms in the future, using ajx instead-->
-    <div class="form-group">
-        <label for="username">Username</label> <!-- for must match the id bellow -->
-        <input ng-model="model.user.username"
-               type="text"
-               class="form-control"
-               id="username" />
-    </div>
-    <div class="form-group">
-        <label for="email">Email</label> <!-- for must match the id bellow -->
-        <input ng-model="model.user.email"
-               type="text"
-               class="form-control"
-               id="email" />
-    </div>
-    <div class="form-group">
-        <label for="first">First Name</label> <!-- for must match the id bellow -->
-        <input ng-model="model.user.firstName"
-               type="text"
-               class="form-control"
-               id="first" />
-    </div>
-    <div class="form-group">
-        <label for="last">Last Name</label> <!-- for must match the id bellow -->
-        <input ng-model="model.user.lastName"
-               type="text"
-               class="form-control"
-               id="last" />
-    </div>
-</form>
+    <form name="profileForm">
+        <div class="form-group"
+             ng-class="{ 'has-error' : profileForm.username.$invalid && !profileForm.username.$pristine }">
+            <label for="username">Username</label> <!-- for must match the id bellow -->
+            <input name="username"
+                   ng-model="model.user.username"
+                   type="text"
+                   class="form-control"
+                   id="username"
+                   required />
+            <span class="help-block"
+                  ng-show="profileForm.username.$invalid && !profileForm.username.$pristine">
+                Please provide a username.
+            </span>
+        </div>
 
-<a class="btn btn-primary btn-block"
-   href="#/user/{{model.user._id}}/website">Websites</a>
-<a class="btn btn-danger btn-block"
-   href="#/login">Logout</a>
-<a class="btn btn-danger btn-block"
-   ng-click="model.unregister()">Unregister</a>
+        <div class="form-group">
+            <label for="email">Email</label> <!-- for must match the id bellow -->
+            <input name="email"
+                   id="email"
+                   ng-model="model.user.email"
+                   type="text"
+                   class="form-control" />
+        </div>
 
+        <div class="form-group">
+            <label for="phone">Phone</label> <!-- for must match the id bellow -->
+            <input name="phone"
+                   id="phone"
+                   ng-model="model.user.phone"
+                   type="text"
+                   class="form-control" />
+        </div>
 
+        <div class="form-group">
+            <label for="first">First Name</label> <!-- for must match the id bellow -->
+            <input ng-model="model.user.firstName"
+                   type="text"
+                   class="form-control"
+                   id="first" />
+        </div>
+
+        <div class="form-group">
+            <label for="last">Last Name</label> <!-- for must match the id bellow -->
+            <input ng-model="model.user.lastName"
+                   type="text"
+                   class="form-control"
+                   id="last" />
+        </div>
+
+        <a class="btn btn-primary btn-block"
+           href="#/user/{{model.user._id}}/website">Websites</a>
+
+        <a class="btn btn-danger btn-block"
+           href="#/login">Logout</a>
+
+        <a class="btn btn-danger btn-block"
+           ng-click="model.unregister()">Unregister</a>
+    </form>
 </div>

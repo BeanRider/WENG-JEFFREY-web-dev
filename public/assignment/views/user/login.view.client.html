@@ -3,7 +3,6 @@
 
     <h2>Login</h2>
 
-    <!-- Trufee? model.error has to be there to render -->
     <div ng-if="model.error"
          class="alert alert-danger"
          role="alert">
@@ -12,20 +11,40 @@
         {{model.error}}
     </div>
 
-    <!-- ng-model variables: Only available in the view -->
-    <input ng-model="username"
-           class="form-control"
-           placeholder="username"
-           type="text"/>
+    <form name="loginForm">
 
-    <!-- ng-model variables: Only available in the view -->
-    <input ng-model="password"
-           class="form-control"
-           placeholder="password"
-           type="password" />
+        <div name="usernameGroup"
+             class="form-group"
+             ng-class="{ 'has-error' : loginForm.username.$invalid && !loginForm.username.$pristine }">
+            <input name="username"
+                   ng-model="username"
+                   class="form-control"
+                   placeholder="username"
+                   type="text"
+                   required />
+            <span ng-show="loginForm.username.$invalid && !loginForm.username.$pristine"
+                  class="help-block">Please enter a username.</span>
+        </div>
 
-    <a ng-click="model.login(username, password)"
-       class="btn btn-primary btn-block">Login</a>
-    <a class="btn btn-success btn-block"
-       href="#/register">Register</a>
+        <div name="passwordGroup"
+             class="form-group"
+             ng-class="{ 'has-error' : loginForm.password.$invalid && !loginForm.password.$pristine }">
+            <input name="password"
+                   ng-model="password"
+                   class="form-control"
+                   placeholder="password"
+                   type="password"
+                   required />
+            <span ng-show="loginForm.password.$invalid && !loginForm.password.$pristine"
+                  class="help-block">Please enter a password.</span>
+        </div>
+
+        <a ng-click="model.login(username, password)"
+           class="btn btn-primary btn-block"
+           ng-disabled="loginForm.$invalid">Login</a>
+
+        <a class="btn btn-success btn-block"
+           href="#/register">Register</a>
+    </form>
+
 </div>

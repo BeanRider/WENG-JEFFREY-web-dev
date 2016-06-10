@@ -17,8 +17,11 @@
                     function(response) { // <- using promises
                         console.log(response);
                         var user = response.data;
-                        if (user != null) {
+                        if (user) { // Truthy: model.error has to be there to render
                             $location.url("/user/" + user._id);
+                        } else {
+                            // if responded with a null
+                            vm.error = "Username and password pair not found!";
                         }
                     },
                     // Error

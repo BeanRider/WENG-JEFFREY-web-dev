@@ -16,21 +16,53 @@
         <span class="sr-only">Error:</span>{{model.error}}
     </div>
 
-    <input ng-model="username"
-           class="form-control"
-           placeholder="username"
-           type="text" />
-    <input ng-model="password"
-           class="form-control"
-           placeholder="password"
-           type="password" />
-    <input ng-model="passwordAgain"
-           class="form-control"
-           placeholder="verify password"
-           type="password" />
+    <form name="registerForm">
+        <div class="form-group"
+             ng-class=" { 'has-error' : registerForm.username.$invalid && !registerForm.username.$pristine }">
+            <input name="username"
+                   ng-model="username"
+                   class="form-control"
+                   placeholder="username"
+                   type="text"
+                   required />
+            <span class="help-block"
+                  ng-show="registerForm.username.$invalid && !registerForm.username.$pristine">
+                    Please provide a username.
+            </span>
+        </div>
+
+        <div class="form-group"
+             ng-class=" { 'has-error' : registerForm.password.$invalid && !registerForm.password.$pristine } ">
+            <input name="password"
+                   ng-model="password"
+                   class="form-control"
+                   placeholder="password"
+                   type="password"
+                   required />
+            <span class="help-block"
+                  ng-show="registerForm.password.$invalid && !registerForm.password.$pristine">
+                Please provide a password.
+            </span>
+        </div>
+
+        <div class="form-group"
+             ng-class=" { 'has-error' : registerForm.passwordAgain.$invalid && !registerForm.passwordAgain.$pristine} ">
+            <input name="passwordAgain"
+                   ng-model="passwordAgain"
+                   class="form-control"
+                   placeholder="verify password"
+                   type="password"
+                   required />
+            <span class="help-block"
+                  ng-show="registerForm.passwordAgain.$invalid && !registerForm.passwordAgain.$pristine">
+                Passwords do not match.
+            </span>
+        </div>
+    </form>
 
     <a class="btn btn-primary btn-block"
-       ng-click="model.register(username, password, passwordAgain)">Register</a>
+       ng-click="model.register(username, password, passwordAgain)"
+       ng-disabled="registerForm.$invalid">Register</a>
     <a class="btn btn-danger btn-block"
        href="#/login">Cancel</a>
 </div>
