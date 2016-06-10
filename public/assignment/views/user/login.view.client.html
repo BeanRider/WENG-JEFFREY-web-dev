@@ -39,9 +39,9 @@
                   class="help-block">Please enter a password.</span>
         </div>
 
-        <a ng-click="model.login(username, password)"
-           class="btn btn-primary btn-block"
-           ng-disabled="loginForm.$invalid">Login</a>
+        <button ng-click="model.login(username, password)"
+                class="btn btn-primary btn-block"
+                ng-disabled="loginForm.$invalid">Login</button>
 
         <a class="btn btn-success btn-block"
            href="#/register">Register</a>
