@@ -12,10 +12,11 @@
                 Edit Website
             </span>
             <p class="navbar-text pull-right">
-                <a ng-click="model.updateWebsite()"
-                   class="navbar-link">
+                <button ng-click="model.updateWebsite()"
+                        class="navbar-link clear-button"
+                        ng-disabled="editWebsiteForm.$invalid">
                     <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-                </a>
+                </button>
             </p>
         </div>
     </div>
@@ -56,15 +57,22 @@
         <span class="sr-only">Error:</span>{{model.error}}
     </div>
 
-    <form> <!-- Doesn't need to be form, can be a div. We are not even going to use forms in the futuer, using ajx instead-->
-        <div class="form-group">
-            <label for="username">Website Name</label> <!-- for must match the id bellow -->
+    <form name="editWebsiteForm"> <!-- Doesn't need to be form, can be a div. We are not even going to use forms in the futuer, using ajx instead-->
+        <div class="form-group"
+             ng-class=" { 'has-error' : editWebsiteForm.name.$invalid && !editWebsiteForm.name.$pristine}">
+            <label for="name">Website Name</label> <!-- for must match the id bellow -->
             <input type="text"
                    value="{{model.website.name}}"
                    ng-model="model.website.name"
                    class="form-control"
-                   id="username"
-                   placeholder="Enter website name here..." />
+                   id="name"
+                   name="name"
+                   placeholder="Enter website name here..."
+                   required />
+            <span class="help-block"
+                  ng-show="editWebsiteForm.name.$invalid && !editWebsiteForm.name.$pristine">
+                Please provide a name.
+            </span>
         </div>
         <div class="form-group">
             <label for="description">Website Description</label> <!-- for must match the id bellow -->

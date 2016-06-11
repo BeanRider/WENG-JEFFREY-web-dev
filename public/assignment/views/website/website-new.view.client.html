@@ -13,12 +13,12 @@
                 New Website
             </span>
             <p class="navbar-text pull-right">
-                <a href=""
-                   class="navbar-link"
-                   ng-click="model.newWebsite()">
+                <button class="navbar-link clear-button"
+                        ng-click="model.newWebsite()"
+                        ng-disabled="newWebsiteForm.$invalid">
                     <span class="glyphicon glyphicon-ok"
                           aria-hidden="true"></span>
-                </a>
+                </button>
             </p>
         </div>
     </div>
@@ -53,15 +53,23 @@
         <span class="sr-only">Error:</span>{{model.error}}
     </div>
     
-    <form>
-        <div class="form-group">
+    <form name="newWebsiteForm">
+        <div class="form-group"
+             ng-class="{ 'has-error' : newWebsiteForm.name.$invalid && !newWebsiteForm.name.$pristine}">
             <label for="name">Name</label> <!-- for must match the id bellow -->
             <input ng-model="model.website.name"
                    type="text"
                    class= "form-control"
+                   name="name"
                    id ="name"
-                   placeholder="Name" />
+                   placeholder="Name"
+                   required />
+            <span class="help-block"
+                  ng-show="newWebsiteForm.name.$invalid && !newWebsiteForm.name.$pristine">
+                Please provide a name.
+            </span>
         </div>
+
         <div class="form-group">
             <label for="description">Description</label> <!-- for must match the id bellow -->
             <textarea ng-model="model.website.description"
