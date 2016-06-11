@@ -50,7 +50,7 @@ module.exports = function() {
     }
 
     function deleteUser(userId) {
-        return User.remove({
+        return User.findOneAndRemove({
             _id: userId
         });
     }
