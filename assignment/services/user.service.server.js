@@ -22,6 +22,12 @@ module.exports = function(app, models) {
     function createUser(req, res) {
         var newUser = req.body;
 
+        // Null check
+        if (newUser == null) {
+            res.status(400).send("A username cannot be null!");
+            return;
+        }
+
         userModel
             .findUserByUsername(newUser.username)
             .then(
@@ -102,7 +108,7 @@ module.exports = function(app, models) {
                     res.json(user);
                 },
                 function(error) {
-                    res.status(404).send("User id is not found: " + id + + ". " + error.data);
+                    res.status(404).send("User id is not found: " + id + ". " + error.data);
                 }
             );
     }
@@ -110,6 +116,11 @@ module.exports = function(app, models) {
     function updateUser(req, res) {
         var id = req.params.userId;
         var newUser = req.body;
+
+        if (!newUser) {
+            res.status(400).send("Provided a null updated user!");
+            return;
+        }
 
         userModel
             .updateUser(id, newUser)
@@ -130,7 +141,7 @@ module.exports = function(app, models) {
         userModel
             .deleteUser(id)
             .then(
-                function(status) {
+                function(user) {
                     res.send(200);
                 },
                 function(error) {
