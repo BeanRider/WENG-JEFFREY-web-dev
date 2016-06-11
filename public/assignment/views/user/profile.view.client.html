@@ -6,11 +6,12 @@
                 Profile
             </span>
             <p class="navbar-text pull-right">
-                <a ng-click="model.updateUser()"
-                   class="navbar-link">
+                <button ng-click="model.updateUser()"
+                        class="navbar-link clear-button"
+                        ng-disabled="profileForm.$invalid">
                     <span class="glyphicon glyphicon-ok"
                           aria-hidden="true"></span>
-                </a>
+                </button>
             </p>
         </div>
     </div>
