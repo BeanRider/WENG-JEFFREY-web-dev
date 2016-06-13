@@ -12,10 +12,12 @@
                 Edit Page
             </span>
             <p class="navbar-text pull-right">
-                <a ng-click="model.updatePage()"
-                   class="navbar-link">
-                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-                </a>
+                <button class="navbar-link clear-button"
+                        ng-click="model.updatePage()"
+                        ng-disabled="editPageForm.$invalid">
+                    <span class="glyphicon glyphicon-ok"
+                          aria-hidden="true"></span>
+                </button>
             </p>
         </div>
     </div>
@@ -50,22 +52,27 @@
         <span class="sr-only">Error:</span>{{model.error}}
     </div>
 
-    <form> <!-- Doesn't need to be form, can be a div. We are not even going to use forms in the futuer, using ajx instead-->
-        <div class="form-group">
+    <form name="editPageForm"> <!-- Doesn't need to be form, can be a div. We are not even going to use forms in the futuer, using ajx instead-->
+        <div class="form-group"
+             ng-class="{ 'has-error' : editPageForm.name.$invalid && !editPageForm.name.$pristine}">
             <label for="name">Name</label> <!-- for must match the id bellow -->
             <input ng-model="model.page.name"
                    type="text"
-                   value="Blog Post"
                    class="form-control"
-                   id ="name"
-                   placeholder="Page Name" />
+                   id="name"
+                   name="name"
+                   placeholder="Page Name"
+                   required />
+            <span class="help-block"
+                  ng-show="editPageForm.name.$invalid && !editPageForm.name.$pristine">
+                Please provide a name.</span>
         </div>
         <div class="form-group">
             <label for="title">Title</label> <!-- for must match the id bellow -->
             <input ng-model="model.page.title"
                    type="text"
                    class= "form-control"
-                   id ="title"
+                   id="title"
                    placeholder="Page Title" />
         </div>
     </form>

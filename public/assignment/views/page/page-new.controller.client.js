@@ -21,6 +21,7 @@
                 .createPage(vm.websiteId, vm.page)
                 .then(
                     function(response) {
+                        console.log("Reach");
                         vm.error = null;
                         vm.succcess = "New Page added!";
                         $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
