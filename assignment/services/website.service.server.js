@@ -1,7 +1,7 @@
-module.exports = function(app, model) {
+module.exports = function(app, models) {
 
-    var websiteModel = model.websiteModel;
-    var userModel = model.userModel;
+    var websiteModel = models.websiteModel;
+    var userModel = models.userModel;
 
     // var websites = [
     //     { "_id": "123", "name": "Facebook",    "developerId": "456" },
@@ -101,6 +101,11 @@ module.exports = function(app, model) {
             .findWebsiteById(websiteId)
             .then(
                 function(website) {
+                    if (!website) {
+                        res.status(404).send(
+                            "Given website ID: " + websiteId + " not found!");
+                        return;
+                    }
                     res.json(website);
                 },
                 function(error) {
@@ -180,7 +185,7 @@ module.exports = function(app, model) {
                         );
                 },
                 function(error) {
-                    res.status(404).send("Failed to update website with id: " + websiteId + "! " + error.data);
+                    res.status(400).send("Failed to delete website with id: " + websiteId + "! " + error.data);
                 }
             );
     }
