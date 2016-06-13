@@ -65,8 +65,7 @@ module.exports = function(app, models) {
             // if given only username
             findUserByUsername(username, res);
         } else {
-            // no given queries, respond with all users.
-            res.json(users);
+            res.status(400).send("Unable to respond to given URL query!");
         }
     }
 
@@ -105,6 +104,11 @@ module.exports = function(app, models) {
             .findUserById(id)
             .then(
                 function(user) {
+                    if (!user) {
+                        res.status(404).send(
+                            "Given user ID: " + id + " not found!");
+                        return;
+                    }
                     res.json(user);
                 },
                 function(error) {
