@@ -1,0 +1,90 @@
+<div class="row sortable-widgets" ng-controller="WidgetListController as model">
+
+    <div ng-repeat="widget in model.widgets"
+         class="jw-widget {{widget.class}}">
+
+        <div class="jw-widget-tool pull-right">
+            <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{widget._id}}">
+                    <span class="glyphicon glyphicon-cog"
+                          aria-hidden="true"></span>
+            </a>
+                <span class="glyphicon glyphicon-menu-hamburger"
+                      aria-hidden="true"></span>
+        </div>
+
+        <div ng-switch="widget.type">
+            <div ng-switch-when="HEADING">
+                <div ng-switch="widget.size">
+                    <div ng-switch-when="1">
+                        <h1>{{widget.text}}</h1>
+                    </div>
+                    <div ng-switch-when="2">
+                        <h2>{{widget.text}}</h2>
+                    </div>
+                    <div ng-switch-when="3">
+                        <h3>{{widget.text}}</h3>
+                    </div>
+                    <div ng-switch-when="4">
+                        <h4>{{widget.text}}</h4>
+                    </div>
+                    <div ng-switch-when="5">
+                        <h5>{{widget.text}}</h5>
+                    </div>
+                    <div ng-switch-when="6">
+                        <h6>{{widget.text}}</h6>
+                    </div>
+                </div>
+            </div>
+
+            <div ng-switch-when="IMAGE">
+                <!-- ng-src: browser does not fetch data, instead angular will tell the browser to fetch when it is ready-->
+                <img width={{widget.width}}"
+                     ng-src="{{widget.url}}" />
+            </div>
+
+            <div ng-switch-when="HTML"
+                 ng-bind-html="model.getTrustedHtml(widget)"
+                 class="{{widget.class}}">
+            </div>
+
+            <div ng-switch-when="INPUT">
+                <div ng-if="widget.formatted"
+                     ng-model="widget.text"
+                     text-angular
+                     id="textText"
+                     placeholder="{{widget.placeholder}}"
+                     ta-toolbar="[['h1', 'h2', 'h3'],
+                                      ['bold', 'italics', 'underline', 'strikeThrough'],
+                                      ['ul', 'ol'],
+                                      ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
+                                      ['indent', 'outdent'],
+                                      ['html']]"></div>
+                <input ng-if="!widget.formatted && (!widget.rows || widget.rows === 1)"
+                       ng-model="widget.text"
+                       name="{{widget.name}}"
+                       id="{{widget._id}}"
+                       placeholder="{{widget.placeholder}}"
+                       class="form-control" />
+                    <textarea ng-if="!widget.formatted && (widget.rows > 1)"
+                              rows="{{widget.rows}}"
+                              placeholder="{{widget.placeholder}}"
+                              class="form-control"
+                              ng-model="widget.text"></textarea>
+            </div>
+
+            <div ng-switch-when="YOUTUBE"
+                 class="embed-responsive embed-responsive-16by9">
+                <iframe width="{{widget.width}}"
+                        height="auto"
+                        ng-src="{{model.getTrustedUrl(widget)}}"
+                        frameborder="0"
+                        allowfullscreen></iframe>
+
+            </div>
+
+            <div ng-switch-default>
+                {{widget}}
+            </div>
+        </div>
+    </div>
+</div>

@@ -55,7 +55,7 @@
                     },
                     function(error) {
                         vm.success = null;
-                        vm.error = "Failed to delete widget!";
+                        vm.error = error.data;
                     }
                 );
         }

@@ -8,14 +8,16 @@
                               aria-hidden="true"></span>
                 </a>
             </p>
-                <span class="navbar-brand">
-                    Widget Edit
-                </span>
+            <span class="navbar-brand">
+                Widget Edit
+            </span>
             <p class="navbar-text pull-right">
-                <a ng-click="model.updateWidget()" class="navbar-link">
-                        <span class="glyphicon glyphicon-ok"
-                              aria-hidden="true"></span>
-                </a>
+                <button class="navbar-link clear-button"
+                        ng-click="model.updateWidget()"
+                        ng-disabled="editWidgetForm.$invalid">
+                    <span class="glyphicon glyphicon-ok"
+                          aria-hidden="true"></span>
+                </button>
             </p>
         </div>
     </div>
@@ -50,22 +52,39 @@
         <span class="sr-only">Error:</span>{{model.error}}
     </div>
 
-    <div ng-switch="model.widget.widgetType">
-        <div ng-switch-when="HEADER">
-            <div class="form-group">
-                <label for="name">Name</label>
+    <div ng-switch="model.widget.type">
+
+        <form name="editWidgetForm"
+              ng-switch-when="HEADING">
+            <h3>Heading</h3>
+            <div class="form-group"
+                 ng-class="{ 'has-error' : editWidgetForm.name.$invalid && !editWidgetForm.name.$pristine}">
+                <label for="headingName">Name</label>
                 <input type="text"
                        ng-model="model.widget.name"
                        class="form-control"
-                       id ="name"
-                       placeholder="Heading Name" />
+                       id="headingName"
+                       name="name"
+                       placeholder="Heading Name"
+                       required />
+                <span class="help-block"
+                      ng-show="editWidgetForm.name.$invalid && !editWidgetForm.name.$pristine">
+                    Please provide a name.</span>
             </div>
             <div class="form-group">
-                <label for="text">Text</label>
+                <label for="headingBootstrapClass">Bootstrap Class</label>
+                <input ng-model="model.widget.class"
+                       type="text"
+                       class="form-control"
+                       id="headingBootstrapClass"
+                       placeholder="BootStrap class here" />
+            </div>
+            <div class="form-group">
+                <label for="headingText">Text</label>
                 <input ng-model="model.widget.text"
                        type="text"
                        class="form-control"
-                       id="text"
+                       id="headingText"
                        placeholder="Heading Text" />
             </div>
             <div class="form-group">
@@ -80,47 +99,172 @@
                     <option>5</option>
                 </select>
             </div>
-        </div>
+        </form>
 
-        <div ng-switch-when="IMAGE">
-            <div class="form-group">
-                <label for="name">Name</label>
+        <form name="editWidgetForm"
+             ng-switch-when="INPUT">
+            <h3>Text Input</h3>
+            <div class="form-group"
+                 ng-class="{ 'has-error' : editWidgetForm.name.$invalid && !editWidgetForm.name.$pristine}">
+                <label for="inputName">Name</label>
                 <input type="text"
-                       class="form-control"
-                       id ="name"
                        ng-model="model.widget.name"
-                       placeholder="Image Name" />
+                       class="form-control"
+                       id="inputName"
+                       name="name"
+                       placeholder="Text Name"
+                       required />
+                <span class="help-block"
+                      ng-show="editWidgetForm.name.$invalid && !editWidgetForm.name.$pristine">
+                    Please provide a name.
+                </span>
             </div>
             <div class="form-group">
-                <label for="text">Text</label>
+                <label for="inputBootstrapClass">Bootstrap Class</label>
+                <input ng-model="model.widget.class"
+                       type="text"
+                       class="form-control"
+                       id="inputBootstrapClass"
+                       placeholder="BootStrap class here" />
+            </div>
+            <div class="form-group">
+                <label for="inputText">Text</label>
+                <input ng-model="model.widget.text"
+                       type="text"
+                       class="form-control"
+                       id="inputText"
+                       placeholder="Text input text value here" />
+            </div>
+            <div class="form-group">
+                <label for="inputRows">Rows</label>
+                <input class="form-control"
+                       ng-model="model.widget.rows"
+                       type="text"
+                       placeholder="Text input number of rows here"
+                       id="inputRows" />
+            </div>
+            <div class="form-group">
+                <label for="inputPlaceholder">Placeholder</label>
+                <input class="form-control"
+                       ng-model="model.widget.placeholder"
+                       type="text"
+                       placeholder="Text input placeholder here"
+                       id="inputPlaceholder" />
+            </div>
+            <div class="form-group">
+                <label for="inputFormatted">Formatted</label>
+                <div class="input-group"
+                     id="inputFormatted">
+                    <input type="text"
+                           class="form-control"
+                           value="Formatted"
+                           aria-label="Text input with checkbox"
+                           ng-disabled="true" />
+                    <span class="input-group-addon">
+                        <input ng-model="model.widget.formatted"
+                               type="checkbox"
+                               aria-label="Checkbox for following text input" />
+                    </span>
+                </div>
+            </div>
+        </form>
+
+        <form name="editWidgetForm"
+             ng-switch-when="HTML">
+            <h3>HTML</h3>
+            <div class="form-group"
+                 ng-class="{ 'has-error' : editWidgetForm.name.$invalid && !editWidgetForm.name.$pristine}">
+                <label for="htmlName">Name</label>
+                <input type="text"
+                       ng-model="model.widget.name"
+                       class="form-control"
+                       id="htmlName"
+                       name="name"
+                       placeholder="HTML Name"
+                       required />
+                <span class="help-block"
+                      ng-show="editWidgetForm.name.$invalid && !editWidgetForm.name.$pristine">
+                    Please provide a name.
+                </span>
+            </div>
+            <div class="form-group">
+                <label for="htmlBootstrapClass">Bootstrap Class</label>
+                <input ng-model="model.widget.class"
+                       type="text"
+                       class="form-control"
+                       id="htmlBootstrapClass"
+                       placeholder="BootStrap class here" />
+            </div>
+            <div class="form-group">
+                <label for="htmlText">Text</label>
+                <div ng-model="model.widget.text"
+                     text-angular
+                     id="htmlText"
+                     ta-toolbar="[['h1', 'h2', 'h3'],
+                                  ['bold', 'italics', 'underline', 'strikeThrough'],
+                                  ['ul', 'ol'],
+                                  ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
+                                  ['indent', 'outdent'],
+                                  ['html']]"></div>
+            </div>
+        </form>
+
+        <form name="editWidgetForm"
+              ng-switch-when="IMAGE">
+            <h3>Image</h3>
+            <div class="form-group"
+                 ng-class="{ 'has-error' : editWidgetForm.name.$invalid && !editWidgetForm.name.$pristine}">
+                <label for="imageName">Name</label>
                 <input type="text"
                        class="form-control"
-                       id="text"
+                       id="imageName"
+                       name="name"
+                       ng-model="model.widget.name"
+                       placeholder="Image Name"
+                       required />
+                <span class="help-block"
+                      ng-show="editWidgetForm.name.$invalid && !editWidgetForm.name.$pristine">
+                    Please provide a name.
+                </span>
+            </div>
+            <div class="form-group">
+                <label for="imageBootstrapClass">Bootstrap Class</label>
+                <input ng-model="model.widget.class"
+                       type="text"
+                       class="form-control"
+                       id="imageBootstrapClass"
+                       placeholder="BootStrap class here" />
+            </div>
+            <div class="form-group">
+                <label for="imageText">Text</label>
+                <input type="text"
+                       class="form-control"
+                       id="imageText"
                        ng-model="model.widget.text"
                        placeholder="Image Text" />
             </div>
             <div class="form-group">
-                <label for="url">URL</label>
+                <label for="imageURL">URL</label>
                 <input type="text"
                        class="form-control"
-                       id="url"
+                       id="imageURL"
                        ng-model="model.widget.url"
                        placeholder="Image URL" />
             </div>
             <div class="form-group">
-                <label for="width">Width</label>
+                <label for="imageWidth">Width</label>
                 <input type="text"
                        class="form-control"
-                       id="width"
+                       id="imageWidth"
                        ng-model="model.widget.width"
                        placeholder="Image Width" />
             </div>
-            <!--<div class="form-group">-->
-                <!--<label for="upload">Upload</label>-->
-                <!--<input type="file"-->
-                       <!--class="form-control"-->
-                       <!--id="upload" />-->
-            <!--</div>-->
+            <div class="form-group">
+                <a class="btn btn-primary btn-block"
+                   href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{model.widgetId}}/flickr">
+                    Search
+                </a>
+            </div>
 
             <form action="/api/upload"
                   method="post"
@@ -146,21 +290,33 @@
                 <button type="submit"
                         class="btn btn-block btn-primary">Upload Image</button>
             </form>
+        </form>
 
-            <a class="btn btn-primary btn-block"
-               href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{model.widgetId}}/flickr">
-                Search
-            </a>
-        </div>
-
-        <div ng-switch-when="YOUTUBE">
-            <div class="form-group">
+        <form name="editWidgetForm"
+              ng-switch-when="YOUTUBE">
+            <h3>YouTube</h3>
+            <div class="form-group"
+                 ng-class="{ 'has-error' : editWidgetForm.name.$invalid && !editWidgetForm.name.$pristine}">
                 <label for="name">Name</label>
                 <input type="text"
                        class="form-control"
                        id="name"
+                       name="name"
                        ng-model="model.widget.name"
-                       placeholder="YouTube Name" />
+                       placeholder="YouTube Name"
+                       required />
+                <span class="help-block"
+                      ng-show="editWidgetForm.name.$invalid && !editWidgetForm.name.$pristine">
+                    Please provide a name.
+                </span>
+            </div>
+            <div class="form-group">
+                <label for="youtubeBootstrapClass">Bootstrap Class</label>
+                <input ng-model="model.widget.class"
+                       type="text"
+                       class="form-control"
+                       id="youtubeBootstrapClass"
+                       placeholder="BootStrap class here" />
             </div>
             <div class="form-group">
                 <label for="text">Text</label>
@@ -186,10 +342,11 @@
                        ng-model="model.widget.width"
                        placeholder="YouTube Width" />
             </div>
-        </div>
-        <div ng-switch-default>
+        </form>
+
+        <form ng-switch-default>
             {{widget}}
-        </div>
+        </form>
     </div>
     <a class="btn btn-danger btn-block"
        ng-click="model.deleteWidget()">Delete</a>

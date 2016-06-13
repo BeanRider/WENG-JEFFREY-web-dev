@@ -14,34 +14,10 @@
         }
         init();
 
-        /*
-         var newWidget = {
-         _id: (new Date()).getTime(),
-         widgetType: type,
-         pageId: vm.pid
-         }
-
-         switch (type) {
-         case 'HEADER':
-         newWidget.size = vm.widget.size;
-         newWidget.text = vm.widget.text;
-         break;
-         case 'IMAGE':
-         newWidget.width = vm.widget.width;
-         newWidget.url = vm.widget.url;
-         break;
-         case 'YOUTUBE':
-         newWidget.width = vm.widget.width;
-         newWidget.url = vm.widget.url;
-         break;
-         }
-         WidgetService.createWidget(newWidget);
-         */
-
         function createWidget(type) {
             var newWidget = {
-                widgetType: type,
-            }
+                type: type
+            };
             WidgetService
                 .createWidget(vm.pageId, newWidget)
                 .then(
@@ -54,4 +30,4 @@
                 );
         }
     }
-})()
+})();

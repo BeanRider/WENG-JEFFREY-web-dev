@@ -7,6 +7,7 @@
         var vm = this;
         vm.getTrustedHtml = getTrustedHtml;
         vm.getTrustedUrl = getTrustedUrl;
+        vm.sort = sort;
 
         function init() {
             vm.userId = $routeParams["uid"];
@@ -37,7 +38,21 @@
             return html;
         }
 
-        $(".widget-container").sortable();
-        $(".widget-container").sortable("option", "axis", "y");
+        function sort(start, end) {
+            WidgetService
+                .reorderWidget(vm.pageId, start, end)
+                .then(
+                    function(response) {
+                        // DO NOTHING
+                        vm.error = null;
+                    },
+                    function(error) {
+                        vm.success = null;
+                        vm.error = error.data;
+                    }
+                );
+        }
+
+        // $(".sortable-widgets").sortable();
     }
-})()
+})();
