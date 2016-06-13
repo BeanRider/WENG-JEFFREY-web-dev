@@ -6,6 +6,18 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// Express session support
+var cookieParser = require('cookie-parser');
+var session = require('express-session');
+app.use(cookieParser());
+app.use(session({ secret: process.env.SESSION_SECRET }));
+
+// PassportJS (needs to occur after the express session)
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy; // Strategies are like plugins
+app.use(passport.initialize());
+app.use(passport.session()); // this makes passportjs to remember the session
+
 // configure a public directory to host static content
 app.use(express.static(__dirname + '/public'));
 
