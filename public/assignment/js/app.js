@@ -4,5 +4,5 @@
 // nor does the global fields affect the fields inside the function
 (function() {
     angular
-        .module("WAMApp", ["ngRoute"]);
+        .module("WAMApp", ["ngRoute", "textAngular", "wamDirectives"]); // add js modules (directives) here
 })();
