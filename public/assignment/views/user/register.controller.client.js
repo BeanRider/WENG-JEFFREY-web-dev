@@ -2,7 +2,8 @@
     angular
         .module("WAMApp")
         .controller("RegisterController", RegisterController);
-    function RegisterController($location, UserService) {
+    
+    function RegisterController($location, $rootScope, UserService) {
         var vm = this;
         vm.register = register;
 
@@ -18,17 +19,32 @@
             newUser.username = username;
             newUser.password = password;
 
-            // Unique username validation in the server side
             UserService
-                .createUser(newUser)
+                .register(newUser)
                 .then(
                     function(response) {
-                        $location.url("/user/" + response.data._id);
+                        var user = response.data;
+                        $rootScope.currentUser = user;
+                        $location.url("/user/" + user._id);
+
                     },
                     function(error) {
                         vm.error = error.data;
                     }
                 );
+
+            // Old way
+            // Unique username validation in the server side
+            // UserService
+            //     .createUser(newUser)
+            //     .then(
+            //         function(response) {
+            //             $location.url("/user/" + response.data._id);
+            //         },
+            //         function(error) {
+            //             vm.error = error.data;
+            //         }
+            //     );
         }
     }
 })();

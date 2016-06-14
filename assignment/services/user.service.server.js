@@ -13,6 +13,8 @@ module.exports = function(app, models) {
     // First goes to passport.authenticate, and if passport passes, go to login. if the passport failed, pass forbidden 403
     app.post("/api/login", passport.authenticate('web-app-maker'), login);
 
+    app.post("/api/register", register);
+
     // entry point for getting users using url QUERIES: find by username or credentials
     app.get("/api/user", getUsers);
     // app.get("/api/user?username=:username", findUserByUsername); // this won't work, query url doesn't work
@@ -66,6 +68,43 @@ module.exports = function(app, models) {
     function login(req, res) {
         var user = req.user;
         res.json(user);
+    }
+
+    function register(req, res) {
+        var username = req.body.username;
+        var password = req.body.password;
+
+        userModel
+            .findUserByUsername(username)
+            .then(
+                function(user) {
+                    if (user) {
+                        res.status(400).send("Username already exists!");
+                        return;
+                    } else {
+                        return userModel
+                            .createUser(req.body);
+                    }
+                },
+                function(error) {
+                    res.status(400).send(error);
+                }
+            )
+            .then(
+                function(user) {
+                    // passport added this login function
+                    req.login(user, function(err) {
+                        if (err) {
+                            res.status(400).send(err);
+                        } else {
+                            res.json(user);
+                        }
+                    });
+                },
+                function(error) {
+                    res.status(400).send(error);
+                }
+            );
     }
 
     function createUser(req, res) {

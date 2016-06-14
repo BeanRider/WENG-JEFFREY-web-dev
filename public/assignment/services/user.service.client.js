@@ -15,7 +15,8 @@
             findUserByCredentials : findUserByCredentials,
             updateUser            : updateUser,
             deleteUser            : deleteUser,
-            login                 : login
+            login                 : login,
+            register              : register
         };
         return api;
 
@@ -89,6 +90,15 @@
                 password: password
             };
             // Use https if you want secure posts. Encrypted packages is also 2 times as big as normal packages.
+            return $http.post(url, user);
+        }
+
+        function register(username, password) {
+            var url = "/api/register";
+            var user = {
+                username: username,
+                password: password
+            };
             return $http.post(url, user);
         }
    }
