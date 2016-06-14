@@ -1,23 +1,72 @@
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+
 // Main job is to parse into json, and parse back into json.
 module.exports = function(app, models) {
 
     var userModel = models.userModel;
-
-    // var users = [
-    //     {_id: "123", username: "alice",    password: "alice",    firstName: "Alice",  lastName: "Wonder"  },
-    //     {_id: "234", username: "bob",      password: "bob",      firstName: "Bob",    lastName: "Marley"  },
-    //     {_id: "345", username: "charly",   password: "charly",   firstName: "Charly", lastName: "Garcia"  },
-    //     {_id: "456", username: "jannunzi", password: "jannunzi", firstName: "Jose",   lastName: "Annunzi" }
-    // ];
-
+    
     // Bind the CRUD operations with urls and functions onto the EXPRESS app
     app.post("/api/user", createUser);
+
+    // the body is safely tucked into the http post request, rather than in the url.
+    // First goes to passport.authenticate, and if passport passes, go to login. if the passport failed, pass forbidden 403
+    app.post("/api/login", passport.authenticate('web-app-maker'), login);
+
     // entry point for getting users using url QUERIES: find by username or credentials
     app.get("/api/user", getUsers);
     // app.get("/api/user?username=:username", findUserByUsername); // this won't work, query url doesn't work
     app.get("/api/user/:userId", findUserById);
     app.put("/api/user/:userId", updateUser);
     app.delete("/api/user/:userId", deleteUser);
+
+    passport.use("web-app-maker", new LocalStrategy(localStrategy));
+    passport.serializeUser(serializeUser);
+    passport.deserializeUser(deserializeUser);
+
+    function localStrategy(username, password, done) {
+        userModel
+            .findUserByCredentials(username, password)
+            .then(
+                function(user) {
+                    if (user.username === username && user.password === password) {
+                        return done(null, user); // it enhances the request object with the user.
+                    } else {
+                        return done(null, false);
+                    }
+                },
+                function(error) {
+                    if (error) {
+                        return done(error);
+                    }
+                }
+            );
+    }
+
+    // called right before the response goes back to the client.
+    function serializeUser(user, done) {
+        done(null, user); // in this case the entire user is being serialized.
+    }
+
+    // right before passport intercepts the request, verify data has not been tampered, that the userId is still valid.
+    function deserializeUser(user, done) {
+        userModel
+            .findUserById(user._id)
+            .then(
+                function(user) {
+                    // resets the session
+                    done(null, user);
+                },
+                function(error) {
+                    done(error, null); // 403
+                }
+            );
+    }
+
+    function login(req, res) {
+        var user = req.user;
+        res.json(user);
+    }
 
     function createUser(req, res) {
         var newUser = req.body;
