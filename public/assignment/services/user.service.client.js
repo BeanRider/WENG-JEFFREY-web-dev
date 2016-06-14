@@ -88,6 +88,7 @@
                 username: username,
                 password: password
             };
+            // Use https if you want secure posts. Encrypted packages is also 2 times as big as normal packages.
             return $http.post(url, user);
         }
    }
