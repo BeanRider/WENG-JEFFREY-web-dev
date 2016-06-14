@@ -3,7 +3,7 @@ module.exports = function() {
     var mongoose = require("mongoose");
 
     var connectionString = "mongodb://localhost/cs4550summer1";
-    if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
+    if (process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
         connectionString = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
             process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
             process.env.OPENSHIFT_MONGODB_DB_HOST + ':' +
