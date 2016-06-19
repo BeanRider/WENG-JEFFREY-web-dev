@@ -16,7 +16,9 @@
             updateUser            : updateUser,
             deleteUser            : deleteUser,
             login                 : login,
-            register              : register
+            register              : register,
+            logOut                : logOut,
+            checkLoggedIn         : checkLoggedIn
         };
         return api;
 
@@ -100,6 +102,16 @@
                 password: password
             };
             return $http.post(url, user);
+        }
+
+        function logOut() {
+            var url = "/api/logout";
+            return $http.post(url);
+        }
+
+        function checkLoggedIn() {
+            var url = "/api/loggedin";
+            return $http.get(url);
         }
    }
 })();
