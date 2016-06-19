@@ -3,14 +3,16 @@
         .module("WAMApp")
         .controller("ProfileController", ProfileController);
 
-    function ProfileController($routeParams, $location, UserService) {
+    function ProfileController($routeParams, $rootScope, $location, UserService) {
 
         var vm = this;
         // put all event handlers at the top, just like variables
         vm.updateUser = updateUser;
         vm.unregister = unregister;
+        vm.logOut = logOut;
 
         var id = $routeParams["uid"];
+        
         // execute on load time.
         function init() {
             UserService
@@ -38,6 +40,20 @@
                         vm.success = null;
                         vm.error = error.data;
                     });
+        }
+
+        function logOut() {
+            $rootScope.currentUser = null;
+            UserService
+                .logOut()
+                .then(
+                    function(response) {
+                        $location.url("/login");
+                    },
+                    function(error) {
+                        $location.url("/login");
+                    }
+                );
         }
 
         function unregister() {
