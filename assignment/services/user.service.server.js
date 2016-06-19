@@ -1,11 +1,21 @@
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+var FacebookStrategy = require('passport-facebook').Strategy;
+
+var bcrypt = require('bcrypt-nodejs');
 
 // Main job is to parse into json, and parse back into json.
 module.exports = function(app, models) {
 
     var userModel = models.userModel;
-    
+
+    app.get("/auth/facebook", passport.authenticate('facebook', { scope : 'email' }));
+    app.get("/auth/facebook/callback",
+        passport.authenticate("facebook", {
+            successRedirect: "/#/user",
+            failureRedirect: "/#/login"
+        }));
+
     // Bind the CRUD operations with urls and functions onto the EXPRESS app
     app.post("/api/user", createUser);
 
@@ -15,23 +25,85 @@ module.exports = function(app, models) {
 
     app.post("/api/register", register);
 
+    app.post("/api/logout", logout);
+
+    app.get("/api/loggedin", loggedin);
+
     // entry point for getting users using url QUERIES: find by username or credentials
     app.get("/api/user", getUsers);
     // app.get("/api/user?username=:username", findUserByUsername); // this won't work, query url doesn't work
     app.get("/api/user/:userId", findUserById);
     app.put("/api/user/:userId", updateUser);
     app.delete("/api/user/:userId", deleteUser);
+    // app.delete("/api/user/:userId", authenticate, deleteUser);
+    // this will intercept with authenticate on the server side, and make sure
+    // it is the user in this session. You can put any number of such middlewares in between.
+    // function authenticate(req, res, next) {
+    //     console.log(req.user);
+    //     console.log(req.isAuthenticated());
+    //     if (req.isAuthenticated()) {
+    //         next(); // go forward and call next(), which will go to deleteUser.
+    //     } else {
+    //         res.send(401); // ?
+    //         res.send(403); // not authorized
+    //     }
+    // }
 
     passport.use("web-app-maker", new LocalStrategy(localStrategy));
+    passport.use("facebook", new FacebookStrategy(facebookConfig, facebookStrategy));
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
 
-    function localStrategy(username, password, done) {
+    var facebookConfig = {
+        clientID     : process.env.FACEBOOK_CLIENT_ID,
+        clientSecret : process.env.FACEBOOK_CLIENT_SECRET,
+        callbackURL  : process.env.FACEBOOK_CALLBACK_URL
+    };
+    console.log(facebookConfig.callbackURL);
+
+    function facebookStrategy(token, refreshToken, profile, done) {
+        var id = profile.id;
         userModel
-            .findUserByCredentials(username, password)
+            .findFacebookUser(id)
             .then(
                 function(user) {
-                    if (user.username === username && user.password === password) {
+                    if (user) {
+                        return done(null, user);
+                    } else {
+                        var newUser = {
+                            // TODO this username is a temporary way to resolve this, make sure to validate this.
+                            userName: profile.displayName.replace(/ /g, " "),
+                            facebook: {
+                                id: profile.id,
+                                displayName: profile.displayName
+                            }
+                        };
+                        return userModel.createUser(user);
+                    }
+                },
+                function(error) {
+                    return done(error);
+                }
+            )
+            .then(
+                function(user) {
+                    return done(null, user);
+                },
+                function(error) {
+                    return done(error);
+                }
+            );
+
+        console.log(profile);
+        // TODO
+    }
+
+    function localStrategy(username, password, done) {
+        userModel
+            .findUserByUsername(username)
+            .then(
+                function(user) {
+                    if (user && bcrypt.compareSync(password, user.password)) {
                         return done(null, user); // it enhances the request object with the user.
                     } else {
                         return done(null, false);
@@ -82,6 +154,7 @@ module.exports = function(app, models) {
                         res.status(400).send("Username already exists!");
                         return;
                     } else {
+                        request.body.password = bcrypt.hashSync(user.password);
                         return userModel
                             .createUser(req.body);
                     }
@@ -105,6 +178,20 @@ module.exports = function(app, models) {
                     res.status(400).send(error);
                 }
             );
+    }
+
+    function logout(req, res) {
+        req.logout();
+        res.send(200);
+    }
+
+    function loggedin(req, res) {
+        // isAuthenticated is provided by passport.
+        if (req.isAuthenticated()) {
+            res.json(req.user);
+        } else {
+            res.send('0');
+        }
     }
 
     function createUser(req, res) {
