@@ -8,10 +8,17 @@ module.exports = function() {
         password: {type: String, required: true},
         firstName: {type: String, sparse: true},
         lastName: {type: String, sparse: true},
+        facebook: {
+            id: String,
+            displayName: String
+        },
+        google: {
+            id: String
+        },
         email: {type: String, sparse: true},
         phone: {type: String, sparse: true},
         websites: Array,
-        dateCreated: {type: Date, default: Date.now},
+        dateCreated: {type: Date, default: Date.now}
     }, {collection: "assignment.user"});
 
     return UserSchema;
