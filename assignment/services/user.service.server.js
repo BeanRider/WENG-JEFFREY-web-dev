@@ -12,8 +12,8 @@ module.exports = function(app, models) {
     app.get("/auth/facebook", passport.authenticate('facebook', { scope : 'email' }));
     app.get("/auth/facebook/callback",
         passport.authenticate("facebook", {
-            successRedirect: "/#/user",
-            failureRedirect: "/#/login"
+            successRedirect: "/assignment/#/user",
+            failureRedirect: "/assignment/#/login"
         }));
 
     // Bind the CRUD operations with urls and functions onto the EXPRESS app
@@ -49,11 +49,6 @@ module.exports = function(app, models) {
     //     }
     // }
 
-    passport.use("web-app-maker", new LocalStrategy(localStrategy));
-    passport.use("facebook", new FacebookStrategy(facebookConfig, facebookStrategy));
-    passport.serializeUser(serializeUser);
-    passport.deserializeUser(deserializeUser);
-
     var facebookConfig = {
         clientID     : process.env.FACEBOOK_CLIENT_ID,
         clientSecret : process.env.FACEBOOK_CLIENT_SECRET,
@@ -61,10 +56,16 @@ module.exports = function(app, models) {
     };
     console.log(facebookConfig.callbackURL);
 
+    passport.use('web-app-maker', new LocalStrategy(localStrategy));
+    passport.use("facebook", new FacebookStrategy(facebookConfig, facebookStrategy));
+    passport.serializeUser(serializeUser);
+    passport.deserializeUser(deserializeUser);
+
     function facebookStrategy(token, refreshToken, profile, done) {
         var id = profile.id;
+        console.log(profile);
         userModel
-            .findFacebookUser(id)
+            .findUserByFacebookId(id)
             .then(
                 function(user) {
                     if (user) {
@@ -72,13 +73,13 @@ module.exports = function(app, models) {
                     } else {
                         var newUser = {
                             // TODO this username is a temporary way to resolve this, make sure to validate this.
-                            userName: profile.displayName.replace(/ /g, " "),
+                            username: profile.displayName.replace(/ /g, ""),
                             facebook: {
                                 id: profile.id,
                                 displayName: profile.displayName
                             }
                         };
-                        return userModel.createUser(user);
+                        return userModel.createUser(newUser);
                     }
                 },
                 function(error) {
@@ -146,15 +147,20 @@ module.exports = function(app, models) {
         var username = req.body.username;
         var password = req.body.password;
 
+        console.log(username);
+        console.log(password);
+
         userModel
             .findUserByUsername(username)
             .then(
                 function(user) {
+                    console.log("After confirming with model that username doesn't already exist: " + user);
                     if (user) {
                         res.status(400).send("Username already exists!");
                         return;
                     } else {
-                        request.body.password = bcrypt.hashSync(user.password);
+                        req.body.password = bcrypt.hashSync(password);
+                        console.log("After encrypting password: " + req.body);
                         return userModel
                             .createUser(req.body);
                     }
