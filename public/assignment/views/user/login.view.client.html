@@ -11,37 +11,42 @@
         {{model.error}}
     </div>
 
-    <form name="loginForm">
+    <form name="loginForm"
+          novalidate
+          ng-submit="loginForm.$valid && model.login(username, password)">
 
         <div name="usernameGroup"
              class="form-group"
-             ng-class="{ 'has-error' : loginForm.username.$invalid && !loginForm.username.$pristine }">
+             ng-class="{ 'has-error' : loginForm.username.$invalid && loginForm.$submitted }">
             <input name="username"
                    ng-model="username"
                    class="form-control"
                    placeholder="username"
                    type="text"
-                   required />
-            <span ng-show="loginForm.username.$invalid && !loginForm.username.$pristine"
+                   required
+                   autocorrect="off"
+                   autocapitalize="off" />
+            <span ng-show="loginForm.username.$invalid && loginForm.$submitted"
                   class="help-block">Please enter a username.</span>
         </div>
 
         <div name="passwordGroup"
              class="form-group"
-             ng-class="{ 'has-error' : loginForm.password.$invalid && !loginForm.password.$pristine }">
+             ng-class="{ 'has-error' : loginForm.password.$invalid && loginForm.$submitted }">
             <input name="password"
                    ng-model="password"
                    class="form-control"
                    placeholder="password"
                    type="password"
-                   required />
-            <span ng-show="loginForm.password.$invalid && !loginForm.password.$pristine"
+                   required
+                   autocorrect="off"
+                   autocapitalize="off" />
+            <span ng-show="loginForm.password.$invalid && loginForm.$submitted"
                   class="help-block">Please enter a password.</span>
         </div>
 
-        <button ng-click="model.login(username, password)"
-                class="btn btn-primary btn-block"
-                ng-disabled="loginForm.$invalid">Login</button>
+        <button type="submit"
+                class="btn btn-primary btn-block">Login</button>
 
         <a class="btn btn-success btn-block"
            href="#/register">Register</a>

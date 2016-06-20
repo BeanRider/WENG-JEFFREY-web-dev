@@ -8,7 +8,6 @@
         vm.register = register;
 
         function register(username, password, passwordVerify) {
-
             // password validation
             if (password !== passwordVerify) {
                 vm.error = "Passwords do not match!";
@@ -26,7 +25,6 @@
                         var user = response.data;
                         $rootScope.currentUser = user;
                         $location.url("/user/" + user._id);
-
                     },
                     function(error) {
                         vm.error = error.data;

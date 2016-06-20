@@ -16,9 +16,11 @@
         <span class="sr-only">Error:</span>{{model.error}}
     </div>
 
-    <form name="registerForm">
+    <form name="registerForm"
+          novalidate
+          ng-submit="registerForm.$valid && model.register(username, password, passwordAgain)">
         <div class="form-group"
-             ng-class=" { 'has-error' : registerForm.username.$invalid && !registerForm.username.$pristine }">
+             ng-class=" { 'has-error' : registerForm.username.$invalid && registerForm. $submitted }">
             <input name="username"
                    ng-model="username"
                    class="form-control"
@@ -26,13 +28,13 @@
                    type="text"
                    required />
             <span class="help-block"
-                  ng-show="registerForm.username.$invalid && !registerForm.username.$pristine">
+                  ng-show="registerForm.username.$invalid && registerForm.$submitted">
                     Please provide a username.
             </span>
         </div>
 
         <div class="form-group"
-             ng-class=" { 'has-error' : registerForm.password.$invalid && !registerForm.password.$pristine } ">
+             ng-class=" { 'has-error' : registerForm.password.$invalid && registerForm.$submitted } ">
             <input name="password"
                    ng-model="password"
                    class="form-control"
@@ -40,13 +42,13 @@
                    type="password"
                    required />
             <span class="help-block"
-                  ng-show="registerForm.password.$invalid && !registerForm.password.$pristine">
+                  ng-show="registerForm.password.$invalid && registerForm.$submitted">
                 Please provide a password.
             </span>
         </div>
 
         <div class="form-group"
-             ng-class=" { 'has-error' : registerForm.passwordAgain.$invalid && !registerForm.passwordAgain.$pristine} ">
+             ng-class=" { 'has-error' : registerForm.passwordAgain.$invalid && registerForm.$submitted} ">
             <input name="passwordAgain"
                    ng-model="passwordAgain"
                    class="form-control"
@@ -54,15 +56,15 @@
                    type="password"
                    required />
             <span class="help-block"
-                  ng-show="registerForm.passwordAgain.$invalid && !registerForm.passwordAgain.$pristine">
+                  ng-show="registerForm.passwordAgain.$invalid && registerForm.$submitted">
                 Passwords do not match.
             </span>
         </div>
+        <button type="submit"
+                class="btn btn-primary btn-block">Register</button>
     </form>
 
-    <button class="btn btn-primary btn-block"
-            ng-click="model.register(username, password, passwordAgain)"
-            ng-disabled="registerForm.$invalid">Register</button>
+
     <a class="btn btn-danger btn-block"
        href="#/login">Cancel</a>
 </div>

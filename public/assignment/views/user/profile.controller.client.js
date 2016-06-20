@@ -11,7 +11,7 @@
         vm.unregister = unregister;
         vm.logOut = logOut;
 
-        var id = $routeParams["uid"];
+        var id = $rootScope.currentUser._id;
         
         // execute on load time.
         function init() {
