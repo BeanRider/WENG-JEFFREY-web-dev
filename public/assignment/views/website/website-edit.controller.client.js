@@ -4,7 +4,7 @@
         .module("WAMApp")
         .controller("EditWebsiteController", EditWebsiteController);
 
-    function EditWebsiteController($routeParams, $location, WebsiteService) {
+    function EditWebsiteController($routeParams, $scope, $location, WebsiteService) {
         var vm = this;
         vm.deleteWebsite = deleteWebsite;
         vm.updateWebsite = updateWebsite;
@@ -39,6 +39,12 @@
         }
 
         function updateWebsite() {
+
+            if ($scope.editWebsiteForm.$invalid) {
+                $scope.editWebsiteForm.$submitted = true;
+                return;
+            }
+
             WebsiteService
                 .updateWebsite(vm.website._id, vm.website)
                 .then(

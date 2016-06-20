@@ -14,8 +14,7 @@
             </span>
             <p class="navbar-text pull-right">
                 <button class="navbar-link clear-button"
-                        ng-click="model.newWebsite()"
-                        ng-disabled="newWebsiteForm.$invalid">
+                        ng-click="model.newWebsite()">
                     <span class="glyphicon glyphicon-ok"
                           aria-hidden="true"></span>
                 </button>
@@ -53,9 +52,9 @@
         <span class="sr-only">Error:</span>{{model.error}}
     </div>
     
-    <form name="newWebsiteForm">
+    <form name="newWebsiteForm" novalidate>
         <div class="form-group"
-             ng-class="{ 'has-error' : newWebsiteForm.name.$invalid && !newWebsiteForm.name.$pristine}">
+             ng-class="{ 'has-error' : newWebsiteForm.name.$invalid && newWebsiteForm.$submitted}">
             <label for="name">Name</label> <!-- for must match the id bellow -->
             <input ng-model="model.website.name"
                    type="text"
@@ -65,7 +64,7 @@
                    placeholder="Name"
                    required />
             <span class="help-block"
-                  ng-show="newWebsiteForm.name.$invalid && !newWebsiteForm.name.$pristine">
+                  ng-show="newWebsiteForm.name.$invalid && newWebsiteForm.$submitted">
                 Please provide a name.
             </span>
         </div>

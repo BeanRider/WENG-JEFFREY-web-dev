@@ -3,7 +3,7 @@
         .module("WAMApp")
         .controller("NewWebsiteController", NewWebsiteController);
 
-    function NewWebsiteController($location, $routeParams, WebsiteService) {
+    function NewWebsiteController($location, $scope, $routeParams, WebsiteService) {
         var vm = this;
         vm.newWebsite = newWebsite;
 
@@ -14,6 +14,10 @@
         init();
 
         function newWebsite() {
+            if ($scope.newWebsiteForm.$invalid) {
+                $scope.newWebsiteForm.$submitted = true;
+                return;
+            }
             WebsiteService
                 .createWebsite(vm.userId, vm.website)
                 .then(
