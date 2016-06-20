@@ -306,7 +306,7 @@ module.exports = function(app, models) {
             res.status(400).send("Provided a null updated user!");
             return;
         }
-
+        
         userModel
             .updateUser(id, newUser)
             .then(
