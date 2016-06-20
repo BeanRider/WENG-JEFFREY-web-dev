@@ -3,10 +3,11 @@
        .module("WAMApp")
        .controller("WidgetEditController", WidgetEditController);
 
-    function WidgetEditController($routeParams, $location, WidgetService) {
+    function WidgetEditController($routeParams, $scope, $location, WidgetService) {
         var vm = this;
         vm.updateWidget = updateWidget;
         vm.deleteWidget = deleteWidget;
+        vm.back = back;
 
         function init() {
             vm.userId = $routeParams["uid"];
@@ -19,6 +20,11 @@
                     function(response) {
                         vm.error = null;
                         vm.widget = response.data;
+                        if (vm.widget.name) {
+                            vm.nameless = false;
+                        } else {
+                            vm.nameless = true;
+                        }
                     },
                     function(error) {
                         vm.success = null;
@@ -28,7 +34,20 @@
         }
         init();
 
+        function back() {
+            if (vm.nameless) {
+                $scope.editWidgetForm.$submitted = true;
+                return;
+            }
+            $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget");
+        }
+
         function updateWidget() {
+            if ($scope.editWidgetForm.$invalid) {
+                $scope.editWidgetForm.$submitted = true;
+                return;
+            }
+
             WidgetService
                 .updateWidget(vm.widgetId, vm.widget)
                 .then(
