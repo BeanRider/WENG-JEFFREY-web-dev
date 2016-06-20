@@ -4,6 +4,39 @@
         .config(Config);
 
     function Config($routeProvider) {
+
+        // $q: allows to explicitly resolve/reject promises.
+        // $timeout:
+        // $http:
+        // $location:
+        // $rootScope:
+        var checkLoggedIn = function($q, $timeout, $http, $location, $rootScope, UserService) {
+
+            var deferred = $q.defer();
+
+            UserService
+                .checkLoggedIn()
+                .then(
+                    function(response) {
+                        var user = response.data;
+                        if (user === '0') {
+                            $rootScope.currentUser = null;
+                            deferred.reject();
+                            $location.url('/');
+                        } else {
+                            $rootScope.currentUser = user;
+                            deferred.resolve();
+                        }
+                    },
+                    function(error) {
+                        deferred.reject();
+                        $location.url('/');
+                    }
+                );
+
+            return deferred.promise;
+        };
+
         $routeProvider
             .when("/login", {
                 templateUrl: "views/user/login.view.client.html",
@@ -96,37 +129,5 @@
             .otherwise({
                 redirectTo: "/login"
             });
-
-        // $q: allows to explicitly resolve/reject promises.
-        // $timeout:
-        // $http:
-        // $location:
-        // $rootScope:
-        var checkLoggedIn = function($q, $timeout, $http, $location, $rootScope, UserService) {
-
-            var deferred = $q.defer();
-
-            UserService
-                .checkLoggedIn()
-                .then(
-                    function(response) {
-                        var user = response.data;
-                        if (user === '0') {
-                            $rootScope.currentUser = null;
-                            deferred.reject();
-                            $location.url('/');
-                        } else {
-                            $rootScope.currentUser = user;
-                            deferred.resolve();
-                        }
-                    },
-                    function(error) {
-                        deferred.reject();
-                        $location.url('/');
-                    }
-                );
-
-            return deferred.promise;
-        }
     }
 })();
