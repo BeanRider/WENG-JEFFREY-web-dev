@@ -12,8 +12,7 @@
                 </span>
             <p class="navbar-text pull-right">
                 <button class="navbar-link clear-button"
-                        ng-click="model.newPage()"
-                        ng-disabled="newPageForm.$invalid">
+                        ng-click="model.newPage()">
                     <span class="glyphicon glyphicon-ok"
                           aria-hidden="true"></span>
                 </button>
@@ -51,9 +50,9 @@
         <span class="sr-only">Error:</span>{{model.error}}
     </div>
 
-    <form name="newPageForm">
+    <form name="newPageForm" novalidate>
         <div class="form-group"
-             ng-class="{ 'has-error' : newPageForm.name.$invalid && !newPageForm.name.$pristine}">
+             ng-class="{ 'has-error' : newPageForm.name.$invalid && newPageForm.$submitted}">
             <label for="name">Name</label> <!-- for must match the id bellow -->
             <input ng-model="model.page.name"
                    type="text"
@@ -63,7 +62,7 @@
                    placeholder="Page name"
                    required />
             <span class="help-block"
-                  ng-show="newPageForm.name.$invalid && !newPageForm.name.$pristine">
+                  ng-show="newPageForm.name.$invalid && newPageForm.$submitted">
                 Please provide a name.
             </span>
         </div>

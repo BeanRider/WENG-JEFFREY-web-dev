@@ -4,7 +4,7 @@
         .module("WAMApp")
         .controller("EditPageController", EditPageController);
 
-    function EditPageController($routeParams, $location, PageService) {
+    function EditPageController($routeParams, $scope, $location, PageService) {
 
         var vm = this;
         vm.updatePage = updatePage;
@@ -28,6 +28,11 @@
         init();
 
         function updatePage() {
+            if ($scope.editPageForm.$invalid) {
+                $scope.editPageForm.$submitted = true;
+                return;
+            }
+
             PageService
                 .updatePage(vm.pageId, vm.page)
                 .then(

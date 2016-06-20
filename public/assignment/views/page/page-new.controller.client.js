@@ -4,7 +4,7 @@
         .module("WAMApp")
         .controller("NewPageController", NewPageController);
 
-    function NewPageController($routeParams, $location, PageService) {
+    function NewPageController($routeParams, $scope, $location, PageService) {
 
         var vm = this;
         vm.newPage = newPage;
@@ -17,6 +17,11 @@
         init();
 
         function newPage() {
+            if ($scope.newPageForm.$invalid) {
+                $scope.newPageForm.$submitted = true;
+                return;
+            }
+
             PageService
                 .createPage(vm.websiteId, vm.page)
                 .then(

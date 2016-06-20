@@ -13,8 +13,7 @@
             </span>
             <p class="navbar-text pull-right">
                 <button class="navbar-link clear-button"
-                        ng-click="model.updatePage()"
-                        ng-disabled="editPageForm.$invalid">
+                        ng-click="model.updatePage()">
                     <span class="glyphicon glyphicon-ok"
                           aria-hidden="true"></span>
                 </button>
@@ -52,9 +51,9 @@
         <span class="sr-only">Error:</span>{{model.error}}
     </div>
 
-    <form name="editPageForm"> <!-- Doesn't need to be form, can be a div. We are not even going to use forms in the futuer, using ajx instead-->
+    <form name="editPageForm" novalidate>
         <div class="form-group"
-             ng-class="{ 'has-error' : editPageForm.name.$invalid && !editPageForm.name.$pristine}">
+             ng-class="{ 'has-error' : editPageForm.name.$invalid && editPageForm.$submitted}">
             <label for="name">Name</label> <!-- for must match the id bellow -->
             <input ng-model="model.page.name"
                    type="text"
@@ -64,7 +63,7 @@
                    placeholder="Page Name"
                    required />
             <span class="help-block"
-                  ng-show="editPageForm.name.$invalid && !editPageForm.name.$pristine">
+                  ng-show="editPageForm.name.$invalid && editPageForm.$submitted">
                 Please provide a name.</span>
         </div>
         <div class="form-group">
